@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipe {{ team.title }}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  
+    {% for projectStatus in projectStatuses %}
+    <div class="row">
+        <div class="col-sm">
+            <div class="h1 project-status--card" style="border: solid 3px {{ projectStatus.color }}">
+              {{ projectStatus.title }}
+            </div>
+        </div>
+    </div>
+    {% for project in projectStatus.projects %}
+    <div class="row">
+        <li class="project--list">
+            <a href="{{ path('project_show', {'id': project.id}) }}">{{ project.title }}</a> {% if project.description %} ({{ project.description }}){% endif %} <a href="{{ path('project_edit', {'id': project.id}) }}"><i class="fas fa-edit"></i></a>
+        </li>
+    </div>
+    {% endfor %}
+    {% else %}
+        <div class="col-sm">
+            Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.
+        </div>
+    
+    {% endfor %}
+  <a href="{{ path('project_new') }}">Ajouter un projet</a>
+</div>
+{% endblock %}

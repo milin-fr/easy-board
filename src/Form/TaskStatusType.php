@@ -13,8 +13,6 @@ class TaskStatusType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
 
