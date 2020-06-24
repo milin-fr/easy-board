@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TaskStatus{% endblock %}
+
+{% block body %}
+    <h1>Create new TaskStatus</h1>
+
+    {{ include('task_status/_form.html.twig') }}
+
+    <a href="{{ path('task_status_index') }}">back to list</a>
+{% endblock %}
