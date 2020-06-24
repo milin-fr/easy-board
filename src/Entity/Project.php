@@ -37,6 +37,11 @@ class Project
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProjectStatus::class, inversedBy="projects")
+     */
+    private $projectStatus;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Project
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getProjectStatus(): ?ProjectStatus
+    {
+        return $this->projectStatus;
+    }
+
+    public function setProjectStatus(?ProjectStatus $projectStatus): self
+    {
+        $this->projectStatus = $projectStatus;
 
         return $this;
     }
