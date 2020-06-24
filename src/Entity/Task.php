@@ -32,6 +32,11 @@ class Task
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TaskStatus::class, inversedBy="tasks")
+     */
+    private $taskStatus;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Task
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTaskStatus(): ?TaskStatus
+    {
+        return $this->taskStatus;
+    }
+
+    public function setTaskStatus(?TaskStatus $taskStatus): self
+    {
+        $this->taskStatus = $taskStatus;
 
         return $this;
     }
