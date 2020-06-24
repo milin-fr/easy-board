@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TaskStatusRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class TaskStatus
 {
@@ -114,5 +115,26 @@ class TaskStatus
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /** 
+     * @ORM\PrePersist
+     */
+    public function generateCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /** 
+     * @ORM\PreUpdate
+     */
+    public function generateUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

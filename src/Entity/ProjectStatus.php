@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectStatusRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class ProjectStatus
 {
@@ -148,5 +149,27 @@ class ProjectStatus
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /** 
+     * @ORM\PrePersist
+     */
+    public function generateCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+        $this->color = "#000000";
+    }
+
+    /** 
+     * @ORM\PreUpdate
+     */
+    public function generateUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -170,5 +171,26 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /** 
+     * @ORM\PrePersist
+     */
+    public function generateCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /** 
+     * @ORM\PreUpdate
+     */
+    public function generateUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->displayName;
     }
 }
