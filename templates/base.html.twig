@@ -3,10 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <script src="https://kit.fontawesome.com/39342e49a2.js" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="{{ asset('js/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
