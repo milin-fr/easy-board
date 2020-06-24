@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProjectStatus{% endblock %}
+
+{% block body %}
+    <h1>ProjectStatus</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ project_status.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ project_status.title }}</td>
+            </tr>
+            <tr>
+                <th>DisplayOrder</th>
+                <td>{{ project_status.displayOrder }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ project_status.createdAt ? project_status.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ project_status.updatedAt ? project_status.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ project_status.color }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('project_status_index') }}">back to list</a>
+
+    <a href="{{ path('project_status_edit', {'id': project_status.id}) }}">edit</a>
+
+    {{ include('project_status/_delete_form.html.twig') }}
+{% endblock %}
