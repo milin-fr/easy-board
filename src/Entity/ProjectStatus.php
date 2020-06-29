@@ -162,7 +162,6 @@ class ProjectStatus
     public function generateCreatedAt()
     {
         $this->createdAt = new \DateTime();
-        $this->color = "#000000";
     }
 
     /** 

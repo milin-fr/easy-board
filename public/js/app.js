@@ -2,10 +2,10 @@ var app = {
     init: function() {
         console.log("init");
         document.querySelectorAll(".test-test").forEach(function(link){
-          link.addEventListener("click", app.onClickBtn);
+          link.addEventListener("click", app.addTask);
         });
     },
-    onClickBtn: function(event) {
+    addTask: function(event) {
       event.preventDefault();
       const url = this.href;
 

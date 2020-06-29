@@ -2,6 +2,14 @@
 {
     padding: 5px;
     margin-bottom: 10px;
+    width: 600px;
+}
+
+.user-list
+{
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 .project--list
