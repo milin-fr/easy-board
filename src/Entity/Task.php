@@ -43,6 +43,11 @@ class Task
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="tasks")
+     */
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,5 +132,17 @@ class Task
     public function generateUpdatedAt()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
     }
 }
