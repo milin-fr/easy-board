@@ -11,7 +11,7 @@
     <h2 class="project-status--card" style="border: solid 3px {{ projectStatus.color }}">
         {{ projectStatus.title }}
     </h2>
-    <div class="project-container" data-add-project-url="to be done">
+    <div class="project-container" data-add-project-url="{{ path('project_post') }}">
     {% for project in projectStatus.projects %}
         <li class="project--list">
             <a href="{{ path('project_show', {'id': project.id}) }}">{{ project.title }}</a> {% if project.description %} ({{ project.description }}){% endif %} <a href="{{ path('project_edit', {'id': project.id}) }}"><i class="fas fa-edit"></i></a>

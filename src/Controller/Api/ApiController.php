@@ -18,19 +18,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/project-post, name="project_post")
+     * @Route("/project-post", name="project_post", methods={"POST"})
      */
-    public function projectPost(Request $request, EntityManagerInterface $em)
+    public function projectPost(Request $request, EntityManagerInterface $em, ProjectStatusRepository $projectStatusRepository)
     {
         $project = new Project();
         $contentObject = json_decode($request->getContent());
-        $projectTitle = $contentObject->project_title;
-        $projectDescription = $contentObject->project_description;
-        $project->setDescription($projectDescription);
+        $projectTitle = $contentObject->projectTitle;
+        // $projectDescription = $contentObject->project_description;
+        // $project->setDescription($projectDescription);
         $project->setTitle($projectTitle);
+        $project->setProjectStatus($projectStatusRepository->find(1));
         $em->persist($project);
         $em->flush();
-
         return $this->json($project, 200, [], ['groups' => 'get:projects']);
     }
 }

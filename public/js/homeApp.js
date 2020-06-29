@@ -1,12 +1,10 @@
 var app = {
     init: function() {
-      console.log("init");
       document.querySelector("#add-project--button").addEventListener("click", app.addProjectButton);
     },
     addProjectButton: function() {
       const projectContainer = document.querySelectorAll(".project-container")[0];
       const actionUrl = projectContainer.dataset.addProjectUrl;
-      console.log(actionUrl);
       const projectForm = document.createElement("form");
       projectForm.setAttribute('method', 'post');
       projectForm.setAttribute('action', actionUrl);
@@ -20,6 +18,20 @@ var app = {
       projectForm.appendChild(projectTitleInput);
       projectForm.appendChild(sendButtonInput);
       projectContainer.appendChild(projectForm);
+      projectForm.addEventListener("submit", app.addProjectConfirm);
+    },
+    addProjectConfirm: function(event) {
+      event.preventDefault();
+      const url = this.action;
+      axios.post(url, {
+        "projectTitle": this.querySelector('input[name="title"]').value
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
 };
   

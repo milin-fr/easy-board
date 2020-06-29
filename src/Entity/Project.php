@@ -135,10 +135,9 @@ class Project
     /** 
      * @ORM\PrePersist
      */
-    public function generateCreatedAt(ProjectStatusRepository $projectStatusRepository)
+    public function generateCreatedAt()
     {
         $this->createdAt = new \DateTime();
-        $this->setProjectStatus($projectStatusRepository->find(1));
     }
 
     /** 
