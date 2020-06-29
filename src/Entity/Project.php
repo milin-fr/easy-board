@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use App\Repository\ProjectStatusRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -116,9 +117,10 @@ class Project
     /** 
      * @ORM\PrePersist
      */
-    public function generateCreatedAt()
+    public function generateCreatedAt(ProjectStatusRepository $projectStatusRepository)
     {
         $this->createdAt = new \DateTime();
+        $this->setProjectStatus($projectStatusRepository->find(1));
     }
 
     /** 
