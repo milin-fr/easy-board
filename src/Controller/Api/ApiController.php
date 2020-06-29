@@ -24,9 +24,11 @@ class ApiController extends AbstractController
     {
         $project = new Project();
         $contentObject = json_decode($request->getContent());
+        $projectTitle = $contentObject->project_title;
         $projectDescription = $contentObject->project_description;
         $project->setDescription($projectDescription);
-
+        $project->setTitle($projectTitle);
+        $em->persist($project);
         $em->flush();
 
         return $this->json($project, 200, [], ['groups' => 'get:projects']);

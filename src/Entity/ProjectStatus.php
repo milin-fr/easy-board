@@ -17,16 +17,19 @@ class ProjectStatus
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get:projects"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get:projects"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Groups({"get:projects"})
      */
     private $displayOrder;
 
