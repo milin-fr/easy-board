@@ -53,6 +53,7 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="project")
+     * @Groups({"get:projects"})
      */
     private $tasks;
 
