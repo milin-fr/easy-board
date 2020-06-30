@@ -12,11 +12,17 @@
         {{ projectStatus.title }}
     </h2>
     <div class="project-container" data-add-project-url="{{ path('project_post') }}">
+    <ul class="project--list-container">
     {% for project in projectStatus.projects %}
-        <li class="project--list">
-            <a href="{{ path('project_show', {'id': project.id}) }}">{{ project.title }}</a> {% if project.description %} ({{ project.description }}){% endif %} <a href="{{ path('project_edit', {'id': project.id}) }}"><i class="fas fa-edit"></i></a>
+        <li class="project--list-item" id="project-{{ project.id }}">
+        <form action="" class="project--list-form">
+            <input type="text" name="title" class="input--title" value="{{ project.title }}" readonly>
+            <input type="text" name="description" class="input--description" value="{{ project.description }}" readonly>
+        </form>
+        <i class="fas fa-edit button--edit-project" data-project-id="project-{{ project.id }}"></i>
         </li>
     {% endfor %}
+    </ul>
     </div>
     {% else %}
             Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.

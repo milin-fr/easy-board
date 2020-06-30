@@ -25,8 +25,8 @@ class ApiController extends AbstractController
         $project = new Project();
         $contentObject = json_decode($request->getContent());
         $projectTitle = $contentObject->projectTitle;
-        // $projectDescription = $contentObject->project_description;
-        // $project->setDescription($projectDescription);
+        $projectDescription = $contentObject->projectDescription;
+        $project->setDescription($projectDescription);
         $project->setTitle($projectTitle);
         $project->setProjectStatus($projectStatusRepository->find(1));
         $em->persist($project);

@@ -12,13 +12,18 @@
     right: 0;
 }
 
-.project--list
+.input--title:read-only,
+.input--description:read-only
 {
-    padding-left: 50px;
-    margin-bottom: 10px;
+    border: 0;
 }
 
-.user-toggle--button
+.project--list-form
 {
+    display: inline;
+}
 
+.button--edit-project
+{
+    cursor: pointer;
 }
