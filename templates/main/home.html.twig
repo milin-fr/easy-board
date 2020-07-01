@@ -24,6 +24,8 @@
         </li>
     {% endfor %}
     </ul>
+    <div class="drag-and-drop--landing" data-project-status-id="{{ projectStatus.id }}">
+    </div>
     </div>
     {% else %}
             Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.

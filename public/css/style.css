@@ -5,6 +5,15 @@
     width: 600px;
 }
 
+.drag-and-drop--landing
+{
+    width: 600px;
+    height: 40px;
+    background-color: aquamarine;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
 .user-list
 {
     position: fixed;
