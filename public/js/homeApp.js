@@ -54,8 +54,8 @@ var app = {
       const projectListItem = document.querySelector("#project-" + projectId + "-item");
       projectListItem.querySelector(".input--title").readOnly = false;
       projectListItem.querySelector(".input--description").readOnly = false;
-      projectListItem.querySelector("#project-" + projectId + "-submit-button").style.display = "inline";
-      event.target.style.display = "none";
+      projectListItem.querySelector("#project-" + projectId + "-submit-button").classList.remove("hidden");
+      event.target.classList.add("hidden");
     },
     editProjectSubmit: function(event) {
       event.preventDefault();
@@ -77,10 +77,10 @@ var app = {
         element.readOnly = true;
       });
       document.querySelectorAll(".input--submit-project-change").forEach(element => {
-        element.style.display = "none";
+        element.classList.add("hidden");
       });
       document.querySelectorAll(".button--edit-project").forEach(element => {
-        element.style.display = "inline";
+        element.classList.remove("hidden");
       });
     }
 };

@@ -35,6 +35,10 @@
 
 .input--submit-project-change
 {
-    display: none;
     cursor: pointer;
+}
+
+.hidden
+{
+    display: none;
 }
