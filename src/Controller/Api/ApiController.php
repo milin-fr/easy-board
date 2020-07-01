@@ -48,4 +48,20 @@ class ApiController extends AbstractController
         $em->flush();
         return $this->json($project, 200, [], ['groups' => 'get:projects']);
     }
+
+    /**
+     * @Route("/project-status-update", name="project_status_update", methods={"PUT"})
+     */
+    public function projectStatusUpdate(Request $request, EntityManagerInterface $em, ProjectRepository $projectRepository, ProjectStatusRepository $projectStatusRepository)
+    {
+        $contentObject = json_decode($request->getContent());
+        $project = $projectRepository->find($contentObject->projectId);
+        // $oldProjectStatus = $project->getProjectStatus();
+        $newProjectStatus = $projectStatusRepository->find($contentObject->statusId);
+        // $oldProjectStatus->removeProject($project);
+        // $newProjectStatus->addProject($project);
+        $project->setProjectStatus($newProjectStatus);
+        $em->flush();
+        return $this->json($project, 200, [], ['groups' => 'get:projects']);
+    }
 }

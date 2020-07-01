@@ -3,7 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
 <div class="container">
   
     {% for projectStatus in projectStatuses %}
@@ -11,16 +10,17 @@
     <h2 class="project-status--card" style="border: solid 3px {{ projectStatus.color }}">
         {{ projectStatus.title }}
     </h2>
-    <div class="project--container" data-add-project-url="{{ path('project_post') }}">
+    <div class="project--container" data-add-project-url="{{ path('project_post') }}" data-update-status-url="{{ path('project_status_update') }}">
     <ul class="project--list-container">
     {% for project in projectStatus.projects %}
-        <li class="project--list-item" id="project-{{ project.id }}-item" draggable="true">
+        <li class="project--list-item" id="project-{{ project.id }}-item" draggable="true" data-project-id="{{ project.id }}">
         <form action="{{ path('project_put', {'id': project.id}) }}" class="project--list-form" method="put">
             <input type="text" name="title" class="input--title" value="{{ project.title }}" readonly>
             <input type="text" name="description" class="input--description" value="{{ project.description }}" readonly>
             <input type="submit" class="input--submit-project-change hidden" id="project-{{ project.id }}-submit-button" value="Ok">
         </form>
         <i class="fas fa-edit button--edit-project" data-project-id="{{ project.id }}"></i>
+        <i class="fas fa-arrows-alt"></i>
         </li>
     {% endfor %}
     </ul>
@@ -31,9 +31,6 @@
             Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.
     {% endfor %}
 <button id="add-project--button">Ajouter un projet</button>
-</div>
-<div class="user-list">
-hello
 </div>
 {% block javascripts %}
     <script src="{{ asset('js/homeApp.js') }}"></script>

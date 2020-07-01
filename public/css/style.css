@@ -1,3 +1,8 @@
+.fa-arrows-alt
+{
+    cursor: move;
+}
+
 .project-status--card
 {
     padding: 5px;
@@ -5,13 +10,11 @@
     width: 600px;
 }
 
-.drag-and-drop--landing
+.project--list-item
 {
-    width: 600px;
-    height: 40px;
-    background-color: aquamarine;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    width: 580px;
+    margin: 10px;
+    border: solid white 4px;
 }
 
 .user-list
@@ -29,7 +32,7 @@
 
 .input--description
 {
-    width: 23rem;
+    width: 20rem;
 }
 
 .project--list-form
@@ -50,4 +53,29 @@
 .hidden
 {
     display: none;
+}
+
+.drag-and-drop--landing
+{
+    width: 610px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: 3px lightgray solid;
+    background-color: lightgrey;
+}
+
+.hold
+{
+    border: solid #ccc 4px;
+    opacity: 0.5;
+}
+
+.drag-and-drop--active
+{
+    border: 3px lightgreen solid;
+}
+
+.hovered
+{
+    border: 3px green dashed;
 }
