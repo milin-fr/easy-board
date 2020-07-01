@@ -11,15 +11,16 @@
     <h2 class="project-status--card" style="border: solid 3px {{ projectStatus.color }}">
         {{ projectStatus.title }}
     </h2>
-    <div class="project-container" data-add-project-url="{{ path('project_post') }}">
+    <div class="project--container" data-add-project-url="{{ path('project_post') }}">
     <ul class="project--list-container">
     {% for project in projectStatus.projects %}
-        <li class="project--list-item" id="project-{{ project.id }}">
-        <form action="" class="project--list-form">
+        <li class="project--list-item" id="project-{{ project.id }}-item">
+        <form action="{{ path('project_put', {'id': project.id}) }}" class="project--list-form" method="put">
             <input type="text" name="title" class="input--title" value="{{ project.title }}" readonly>
             <input type="text" name="description" class="input--description" value="{{ project.description }}" readonly>
+            <input type="submit" class="input--submit-project-change" id="project-{{ project.id }}-submit-button" value="Ok">
         </form>
-        <i class="fas fa-edit button--edit-project" data-project-id="project-{{ project.id }}"></i>
+        <i class="fas fa-edit button--edit-project" data-project-id="{{ project.id }}"></i>
         </li>
     {% endfor %}
     </ul>

@@ -15,7 +15,12 @@
 .input--title:read-only,
 .input--description:read-only
 {
-    border: 0;
+    border: none;
+}
+
+.input--description
+{
+    width: 23rem;
 }
 
 .project--list-form
@@ -25,5 +30,11 @@
 
 .button--edit-project
 {
+    cursor: pointer;
+}
+
+.input--submit-project-change
+{
+    display: none;
     cursor: pointer;
 }

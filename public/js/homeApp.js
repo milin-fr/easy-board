@@ -1,11 +1,17 @@
 var app = {
     init: function() {
       document.querySelector("#add-project--button").addEventListener("click", app.addProjectButton);
-      document.querySelector(".button--edit-project").addEventListener("click", app.editProjectButton);
+      document.querySelectorAll(".button--edit-project").forEach(element => {
+        element.addEventListener("click", app.editProjectButton);
+      });
+      document.querySelectorAll(".project--list-form").forEach(element => {
+        element.addEventListener("submit", app.editProjectSubmit);
+      });
     },
     addProjectButton: function() {
-      const projectContainer = document.querySelectorAll(".project--list-container")[0];
+      const projectContainer = document.querySelectorAll(".project--container")[0];
       const actionUrl = projectContainer.dataset.addProjectUrl;
+      console.log(actionUrl);
       const projectForm = document.createElement("form");
       projectForm.setAttribute('method', 'post');
       projectForm.setAttribute('action', actionUrl);
@@ -41,11 +47,41 @@ var app = {
       .catch(function (error) {
         console.log(error);
       });
+      document.location.reload(true);
     },
     editProjectButton: function(event) {
       const projectId = event.target.dataset.projectId;
-      const projectListItem = document.querySelector("#" + projectId);
-      console.log(document.querySelector("#" + projectId));
+      const projectListItem = document.querySelector("#project-" + projectId + "-item");
+      projectListItem.querySelector(".input--title").readOnly = false;
+      projectListItem.querySelector(".input--description").readOnly = false;
+      projectListItem.querySelector("#project-" + projectId + "-submit-button").style.display = "inline";
+      event.target.style.display = "none";
+    },
+    editProjectSubmit: function(event) {
+      event.preventDefault();
+      const url = this.action;
+      axios.put(url, {
+        "projectTitle": this.querySelector('input[name="title"]').value,
+        "projectDescription": this.querySelector('input[name="description"]').value
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      document.querySelectorAll(".input--title").forEach(element => {
+        element.readOnly = true;
+      }); 
+      document.querySelectorAll(".input--description").forEach(element => {
+        element.readOnly = true;
+      });
+      document.querySelectorAll(".input--submit-project-change").forEach(element => {
+        element.style.display = "none";
+      });
+      document.querySelectorAll(".button--edit-project").forEach(element => {
+        element.style.display = "inline";
+      });
     }
 };
   

@@ -33,4 +33,19 @@ class ApiController extends AbstractController
         $em->flush();
         return $this->json($project, 200, [], ['groups' => 'get:projects']);
     }
+
+    /**
+     * @Route("/project-put/{id<\d+>}", name="project_put", methods={"PUT"})
+     */
+    public function projectPut($id, Request $request, EntityManagerInterface $em, ProjectRepository $projectRepository)
+    {
+        $project = $projectRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $projectTitle = $contentObject->projectTitle;
+        $projectDescription = $contentObject->projectDescription;
+        $project->setDescription($projectDescription);
+        $project->setTitle($projectTitle);
+        $em->flush();
+        return $this->json($project, 200, [], ['groups' => 'get:projects']);
+    }
 }
