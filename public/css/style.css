@@ -1,18 +1,27 @@
+.container
+{
+    width: 80%;
+    margin: auto;
+}
 .fa-arrows-alt
 {
     cursor: move;
 }
 
+i
+{
+    margin: 0 5px;
+}
 .project-status--card
 {
     padding: 5px;
     margin-bottom: 10px;
-    width: 600px;
+    width: 50%;
 }
 
 .project--list-item
 {
-    width: 580px;
+    width: 50%;
     margin: 10px;
     border: solid white 4px;
 }
@@ -32,7 +41,7 @@
 
 .input--description
 {
-    width: 20rem;
+    width: 25rem;
 }
 
 .project--list-form
@@ -40,9 +49,20 @@
     display: inline;
 }
 
-.button--edit-project
+.button--edit-project,
+.fa-eye
 {
     cursor: pointer;
+}
+
+.fa-eye
+{
+    color: black;
+}
+
+.fa-eye:hover
+{
+    color: blue;
 }
 
 .input--submit-project-change
@@ -55,27 +75,13 @@
     display: none;
 }
 
-.drag-and-drop--landing
-{
-    width: 610px;
-    height: 40px;
-    margin-bottom: 20px;
-    border: 3px lightgray solid;
-    background-color: lightgrey;
-}
-
 .hold
 {
     border: solid #ccc 4px;
     opacity: 0.5;
 }
 
-.drag-and-drop--active
-{
-    border: 3px lightgreen solid;
-}
-
 .hovered
 {
-    border: 3px green dashed;
+    background-color: lightgreen;
 }
