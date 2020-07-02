@@ -1,6 +1,6 @@
 var app = {
     init: function() {
-      document.querySelector("#add-project--button").addEventListener("click", app.addProjectButton);
+      document.querySelector(".newProject").addEventListener("submit", app.addProject);
       document.querySelectorAll(".button--edit-project").forEach(element => {
         element.addEventListener("click", app.editProjectButton);
       });
@@ -18,38 +18,12 @@ var app = {
         element.addEventListener("drop", app.dragDrop);
       });
     },
-    addProjectButton: function() {
-      const projectContainer = document.querySelectorAll(".project--container")[0];
-      const actionUrl = projectContainer.dataset.addProjectUrl;
-      console.log(actionUrl);
-      const projectForm = document.createElement("form");
-      projectForm.setAttribute('method', 'post');
-      projectForm.setAttribute('action', actionUrl);
-      const projectTitleInput = document.createElement("input");
-      projectTitleInput.setAttribute('type', 'text');
-      projectTitleInput.setAttribute('name', 'title');
-      projectTitleInput.setAttribute('class', 'input--title');
-      projectTitleInput.setAttribute('value', 'Nom du projet');
-      const projectDescriptionInput = document.createElement("input");
-      projectDescriptionInput.setAttribute('type', 'text');
-      projectDescriptionInput.setAttribute('name', 'description');
-      projectDescriptionInput.setAttribute('class', 'input--description');
-      projectDescriptionInput.setAttribute('value', 'Description du projet');
-      const sendButtonInput = document.createElement("input");
-      sendButtonInput.setAttribute('type', 'submit');
-      sendButtonInput.setAttribute('value', 'Submit');
-      projectForm.appendChild(projectTitleInput);
-      projectForm.appendChild(projectDescriptionInput);
-      projectForm.appendChild(sendButtonInput);
-      projectContainer.appendChild(projectForm);
-      projectForm.addEventListener("submit", app.addProjectConfirm);
-    },
-    addProjectConfirm: function(event) {
+    addProject: function(event) {
       event.preventDefault();
       const url = this.action;
       axios.post(url, {
-        "projectTitle": this.querySelector('input[name="title"]').value,
-        "projectDescription": this.querySelector('input[name="description"]').value
+        "projectTitle": this.querySelector('input[name="projectTitle"]').value,
+        "projectDescription": this.querySelector('input[name="projectDescription"]').value
       })
       .then(function (response) {
         document.location.reload(true);

@@ -3,11 +3,29 @@
 {% block title %}{{ user.displayName }}{% endblock %}
 
 {% block body %}
+    
+    <div class="row">
+    <ul class="task-list--container column">
     <h1>{{ user.displayName }}</h1>
-    <ul class="task-list--container">
         {% for task in user.tasks %}
         <li class="task-list--item">
             {{ task.project.title }} : {{ task.title }} <a href="{{ path('project_show', {'id': task.project.id}) }}"><i class="fas fa-eye"></i></a>
         {% endfor %}
     </ul>
+        <ul class="task-list--container column">
+
+        <h1>{{ user.displayName }}</h1>
+        {% for task in user.tasks %}
+        <li class="task-list--item">
+            {{ task.project.title }} : {{ task.title }} <a href="{{ path('project_show', {'id': task.project.id}) }}"><i class="fas fa-eye"></i></a>
+        {% endfor %}
+    </ul>
+        <ul class="task-list--container column">
+        <h1>{{ user.displayName }}</h1>
+        {% for task in user.tasks %}
+        <li class="task-list--item">
+            {{ task.project.title }} : {{ task.title }} <a href="{{ path('project_show', {'id': task.project.id}) }}"><i class="fas fa-eye"></i></a>
+        {% endfor %}
+    </ul>
+    </div>
 {% endblock %}

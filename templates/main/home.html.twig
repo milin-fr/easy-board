@@ -28,7 +28,11 @@
     {% else %}
             Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.
     {% endfor %}
-<button id="add-project--button">Ajouter un projet</button>
+    <form class="newProject" action="{{ path('project_post') }}">
+        <input type="text" name="projectTitle" placeholder="Titre du projet">
+        <input type="text" name="projectDescription" placeholder="Description du projet">
+        <input type="submit" value="Ajouter">
+    </form>
 {% block javascripts %}
     <script src="{{ asset('js/homeApp.js') }}"></script>
 {% endblock %}

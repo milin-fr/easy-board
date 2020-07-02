@@ -90,3 +90,19 @@ i
 {
     margin: 5px 0;
 }
+
+.row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.column
+{
+    width: 33%;
+}
+
+.newProject
+{
+    margin-top: 20px;
+}

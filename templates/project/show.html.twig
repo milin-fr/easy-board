@@ -14,8 +14,8 @@
                     <option value="{{ status.id }}">{{ status.title }}</option>
                 {% endfor %}
             </select>
-            <select class="taskUser" name="taskUser" data-action="{{ path('task_user_put', {'id': task.id}) }}">
-                <option value="{{ task.user ? task.user.id : "" }}" selected>{{ task.user ? task.user.displayName : "Qui va le faire ?" }}</option>
+            <select class="taskUser" name="taskUser" data-action="{{ path('task_user_put', {'id': task.id}) }}" style="background-color:{{ task.user ? task.user.color : "#ffffff" }}">
+                <option value="{{ task.user ? task.user.id : "" }}" selected style="background-color:{{ task.user ? task.user.color : "#ffffff" }}">{{ task.user ? task.user.displayName : "Qui va le faire ?" }}</option>
                 {% for user in users %}
                     <option value="{{ user.id }}">{{ user.displayName }}</option>
                 {% endfor %}
