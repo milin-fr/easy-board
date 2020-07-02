@@ -3,9 +3,13 @@
 namespace App\Controller\Api;
 
 use App\Entity\Project;
+use App\Entity\Task;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
+use App\Repository\TaskRepository;
+use App\Repository\TaskStatusRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,5 +67,51 @@ class ApiController extends AbstractController
         $project->setProjectStatus($newProjectStatus);
         $em->flush();
         return $this->json($project, 200, [], ['groups' => 'get:projects']);
+    }
+
+    /**
+     * @Route("/task-status-put/{id<\d+>}", name="task_status_put", methods={"PUT"})
+     */
+    public function task_status_put($id, TaskRepository $taskRepository, Request $request, EntityManagerInterface $em, TaskStatusRepository $taskStatusRepository)
+    {
+        $task = $taskRepository->find($id);
+
+        $contentObject = json_decode($request->getContent());
+        $taskStatus = $taskStatusRepository->find($contentObject->taskStatusId);
+        $task->setTaskStatus($taskStatus);
+
+        $em->flush();
+
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
+
+    }
+
+    /**
+     * @Route("/task-user-put/{id<\d+>}", name="task_user_put", methods={"PUT"})
+     */
+    public function task_user_put($id, TaskRepository $taskRepository, Request $request, EntityManagerInterface $em, UserRepository $userRepository)
+    {
+        $task = $taskRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $taskSUser = $userRepository->find($contentObject->userId);
+        $task->setUser($taskSUser);
+        $em->flush();
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
+    }
+
+    /**
+     * @Route("/task-post", name="task_post", methods={"POST"})
+     */
+    public function task_post(Request $request, EntityManagerInterface $em, TaskStatusRepository $taskStatusRepository, ProjectRepository $projectRepository)
+    {
+        $task = new Task();
+        $contentObject = json_decode($request->getContent());
+        $task->setTitle($contentObject->taskTitle);
+        $task->setProject($projectRepository->find($contentObject->projectId));
+        $task->setTaskStatus($taskStatusRepository->find(1));
+        $em->persist($task);
+        $em->flush();
+
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
     }
 }

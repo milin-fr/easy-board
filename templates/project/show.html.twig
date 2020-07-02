@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>{{ project.title }}</h1>
+    <ul class="task-list--container">
     {% for task in project.tasks %}
-        <li>
+        <li class="task-list--item">
             {{ task.title }}: 
             <select class="taskStatus" name="taskStatus" data-action="{{ path('task_status_put', {'id': task.id}) }}">
                 <option value="{{task.taskStatus.id }}" selected>{{task.taskStatus }}</option>
@@ -13,20 +14,21 @@
                     <option value="{{ status.id }}">{{ status.title }}</option>
                 {% endfor %}
             </select>
-            <select class="taskUser" name="taskUser" data-action="{{ path('work_team_get_users', {'id': project.workTeam.id}) }}">
-                <option value="{{ task.taskStatus.id }}" selected>{{ task.taskStatus }}</option>
-                {% for user in project.workTeam.users %}
-                    <option value="{{ user.id }}">{{ user.email }}</option>
+            <select class="taskUser" name="taskUser" data-action="{{ path('task_user_put', {'id': task.id}) }}">
+                <option value="{{ task.user ? task.user.id : "" }}" selected>{{ task.user ? task.user.displayName : "Qui va le faire ?" }}</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.displayName }}</option>
                 {% endfor %}
             </select>
         </li>
     {% endfor %}
-    <a href="{{ path('project_index') }}">back to list</a>
-
-    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-    <p><a href="{{ path('task_new') }}">New task</a></p>
-
+    </ul>
+    <form class="newTask" action="{{ path('task_post') }}" data-project-id={{ project.id }}>
+        <label for="task-name">Ajouter une tache :</label>
+        <input type="text" name="task-name" id="">
+        <input type="submit" value="Ajouter">
+    </form>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('js/projectForm.js') }}"></script>
+    <script src="{{ asset('js/projectPageApp.js') }}"></script>
 {% endblock %}
