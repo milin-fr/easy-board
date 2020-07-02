@@ -51,7 +51,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="project_show", methods={"GET"})
+     * @Route("/{id<\d+>}", name="project_show", methods={"GET"})
      */
     public function show(Project $project, TaskStatusRepository $taskStatusRepository, UserRepository $userRepository): Response
     {
@@ -63,7 +63,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="project_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", name="project_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Project $project): Response
     {
@@ -83,7 +83,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="project_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="project_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Project $project): Response
     {

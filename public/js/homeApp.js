@@ -52,12 +52,12 @@ var app = {
         "projectDescription": this.querySelector('input[name="description"]').value
       })
       .then(function (response) {
+        document.location.reload(true);
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-      document.location.reload(true);
     },
     editProjectButton: function(event) {
       const projectId = event.target.dataset.projectId;
