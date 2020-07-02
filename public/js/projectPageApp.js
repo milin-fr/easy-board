@@ -22,6 +22,7 @@ var app = {
     },
     updateTaskUser: function(event) {
       const url = this.dataset.action;
+      console.log(this.value);
       axios.put(url, {
         "userId": this.value
       })
@@ -33,6 +34,7 @@ var app = {
         // handle error
         console.log(error);
       });
+      this.style.backgroundColor = this.selectedOptions[0].dataset.color;
     },
     newTask: function(event) {
       event.preventDefault();

@@ -39,11 +39,17 @@ i
     border: none;
 }
 
+.input--title
+{
+    width: 12rem;
+}
+
 .input--description
 {
     width: 22rem;
 }
 
+.task--title-form,
 .project--list-form
 {
     display: inline;
@@ -105,4 +111,9 @@ i
 .newProject
 {
     margin-top: 20px;
+}
+
+.taskUser
+{
+    width: 10rem;
 }

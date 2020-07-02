@@ -58,7 +58,7 @@ class ProjectController extends AbstractController
         return $this->render('project/show.html.twig', [
             'project' => $project,
             'statuses' => $taskStatusRepository->findAll(),
-            'users' => $userRepository->findAll()
+            'users' => $userRepository->findAll(),
         ]);
     }
 
