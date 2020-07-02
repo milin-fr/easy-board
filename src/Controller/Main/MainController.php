@@ -16,7 +16,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function teamHome(ProjectStatusRepository $projectStatusRepository)
+    public function home(ProjectStatusRepository $projectStatusRepository)
     {
         $projectStatuses = $projectStatusRepository->findAll();
         return $this->render('main/home.html.twig', [

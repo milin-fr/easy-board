@@ -1,38 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}{{ project.title }}{% endblock %}
 
 {% block body %}
-    <h1>Project</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <h1>{{ project.title }}</h1>
+    {% for task in project.tasks %}
+        <li>
+            {{ task.title }}: 
+            <select class="taskStatus" name="taskStatus" data-action="{{ path('task_status_put', {'id': task.id}) }}">
+                <option value="{{task.taskStatus.id }}" selected>{{task.taskStatus }}</option>
+                {% for status in statuses %}
+                    <option value="{{ status.id }}">{{ status.title }}</option>
+                {% endfor %}
+            </select>
+            <select class="taskUser" name="taskUser" data-action="{{ path('work_team_get_users', {'id': project.workTeam.id}) }}">
+                <option value="{{ task.taskStatus.id }}" selected>{{ task.taskStatus }}</option>
+                {% for user in project.workTeam.users %}
+                    <option value="{{ user.id }}">{{ user.email }}</option>
+                {% endfor %}
+            </select>
+        </li>
+    {% endfor %}
     <a href="{{ path('project_index') }}">back to list</a>
 
     <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+    <p><a href="{{ path('task_new') }}">New task</a></p>
 
-    {{ include('project/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/projectForm.js') }}"></script>
 {% endblock %}

@@ -16,6 +16,7 @@
         <li class="project--list-item" id="project-{{ project.id }}-item" draggable="true" data-project-id="{{ project.id }}">
         <form action="{{ path('project_put', {'id': project.id}) }}" class="project--list-form" method="put">
             <input type="text" name="title" class="input--title" value="{{ project.title }}" readonly>
+            <span class="project-task-number">Taches : {{ (project.tasks|length > 0) ? project.tasks|length : 0 }}</span>
             <input type="text" name="description" class="input--description" value="{{ project.description }}" readonly>
             <input type="submit" class="input--submit-project-change hidden" id="project-{{ project.id }}-submit-button" value="Ok">
         </form>
