@@ -6,14 +6,20 @@
 
 {% block body %}
 	<h1>{{ project.title }}</h1>
+		<form class="newTask" action="{{ path('task_post') }}" data-project-id={{ project.id }}>
+		<label for="task-name">Ajouter une tache :</label>
+		<input type="text" name="task-name" id="">
+		<input type="submit" value="Ajouter">
+	</form>
 	{% for taskStatus in statuses %}
 		<h2 class="project-status--card drag-and-drop--landing" style="border: solid 3px {{ taskStatus.color }}" data-task-status-id="{{ taskStatus.id }}">
 			{{ taskStatus.title }}
 		</h2>
-		<ul class="task-list--container">
+		<div class="task--container" data-update-status-url="{{ path('task_status_update') }}">
+		<ul class="task--list-container">
 			{% for task in project.tasks %}
 				{% if task.taskStatus == taskStatus %}
-					<li class="task-list--item">
+					<li class="task--list-item" draggable="true">
                     <form class="task--title-form" action="">
                     <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                     <input type="submit" class="input--submit-task-change hidden" value="Ok">
@@ -26,7 +32,7 @@
 								<option value="{{ user.id }}" data-color="{{ user.color }}" style="background-color:{{ user ? user.color : "#ffffff" }}" {{ task.user == user ? "selected" : "" }}>{{ user.displayName }}</option>
 							{% endfor %}
 						</select>
-                        <i class="fas fa-edit button--edit-project" data-project-id="{{ project.id }}"></i>
+                        <i class="fas fa-edit button--edit-task" data-project-id="{{ project.id }}"></i>
                         <i class="fas fa-arrows-alt"></i>
 					</li>
 				{% endif %}
@@ -34,12 +40,6 @@
 		</ul>
 	{% endfor %}
 
-
-	<form class="newTask" action="{{ path('task_post') }}" data-project-id={{ project.id }}>
-		<label for="task-name">Ajouter une tache :</label>
-		<input type="text" name="task-name" id="">
-		<input type="submit" value="Ajouter">
-	</form>
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('js/projectPageApp.js') }}"></script>

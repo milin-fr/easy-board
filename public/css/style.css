@@ -19,6 +19,7 @@ i
     width: 50%;
 }
 
+.task--list-item,
 .project--list-item
 {
     width: 50%;
@@ -55,6 +56,7 @@ i
     display: inline;
 }
 
+.button--edit-task,
 .button--edit-project,
 .fa-eye
 {
@@ -90,11 +92,6 @@ i
 .hovered
 {
     background-color: lightgreen;
-}
-
-.task-list--item
-{
-    margin: 5px 0;
 }
 
 .row

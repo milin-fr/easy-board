@@ -70,6 +70,22 @@ class ApiController extends AbstractController
     }
 
     /**
+     * @Route("/task-status-update", name="task_status_update", methods={"PUT"})
+     */
+    public function taskStatusUpdate(Request $request, EntityManagerInterface $em, TaskRepository $taskRepository, TaskStatusRepository $taskStatusRepository)
+    {
+        $contentObject = json_decode($request->getContent());
+        $project = $projectRepository->find($contentObject->projectId);
+        // $oldProjectStatus = $project->getProjectStatus();
+        $newProjectStatus = $projectStatusRepository->find($contentObject->statusId);
+        // $oldProjectStatus->removeProject($project);
+        // $newProjectStatus->addProject($project);
+        $project->setProjectStatus($newProjectStatus);
+        $em->flush();
+        return $this->json($project, 200, [], ['groups' => 'get:projects']);
+    }
+
+    /**
      * @Route("/task-status-put/{id<\d+>}", name="task_status_put", methods={"PUT"})
      */
     public function task_status_put($id, TaskRepository $taskRepository, Request $request, EntityManagerInterface $em, TaskStatusRepository $taskStatusRepository)
