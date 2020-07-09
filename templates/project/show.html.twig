@@ -32,7 +32,9 @@
 								<option value="{{ user.id }}" data-color="{{ user.color }}" style="background-color:{{ user ? user.color : "#ffffff" }}" {{ task.user == user ? "selected" : "" }}>{{ user.displayName }}</option>
 							{% endfor %}
 						</select>
+
                         <i class="fas fa-edit button--edit-task" data-task-id="{{ task.id }}"></i>
+						<i class="fas fa-trash-alt" data-delete-url="{{ path('api_task_delete', {'id': task.id}) }}"></i>
                         <i class="fas fa-arrows-alt"></i>
 					</li>
 				{% endif %}

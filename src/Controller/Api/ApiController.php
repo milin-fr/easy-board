@@ -120,4 +120,15 @@ class ApiController extends AbstractController
         $em->flush();
         return $this->json($task, 200, [], ['groups' => 'get:tasks']);
     }
+
+    /**
+     * @Route("/task-delete/{id<\d+>}", name="api_task_delete", methods={"DELETE"})
+     */
+    public function taskDelete($id, EntityManagerInterface $em, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($id);
+        $em->remove($task);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
 }

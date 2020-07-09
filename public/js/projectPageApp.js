@@ -20,6 +20,9 @@ var app = {
         element.addEventListener("dragleave", app.dragLeave);
         element.addEventListener("drop", app.dragDrop);
       });
+      document.querySelectorAll(".fa-trash-alt").forEach(function(link){
+        link.addEventListener("click", app.deleteTask);
+      });
     },
     editTaskButton: function(event) {
       const taskId = event.target.dataset.taskId;
@@ -137,6 +140,21 @@ var app = {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    deleteTask: function(event) {
+      if (confirm("Supprimer ?")){
+        const url = event.target.dataset.deleteUrl;
+        axios.delete(url, {
+        }).then(function (response) {
+          document.location.reload(true);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }else{
+        console.log("nay");
+      }
     }
 };
   
