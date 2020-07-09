@@ -120,3 +120,15 @@ i
     color: red;
     cursor: pointer;
 }
+
+.user--row
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.user--column
+{
+    width: 33%;
+    padding: 10px;
+}

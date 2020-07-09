@@ -1,41 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}L'equipe{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>DisplayName</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.displayName }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+<div class="user--row">
+    {% for user in users %}
+        <div class="user--column">
+        <h1 class="user--name drag-and-drop--landing" style="border: solid 3px {{ user.color }}">{{ user.displayName }}</h1>
+        {% for project in projects %}
+            <div class="project--container">
+                <h2>{{ project.title }} <a href="{{ path('project_show', {'id': project.id}) }}"><i class="fas fa-eye"></i></a></h2>
+                {% for task in project.tasks %}
+                    {% if task in user.tasks and task.taskStatus.title != "Fini" %}
+                        <li class="task--list-item" draggable="true" data-task-id="{{ task.id }}" id="task-{{ task.id }}-item">
+                            {{ task.title }} : {{ task.taskStatus.title }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('js/usersPageApp.js') }}"></script>
 {% endblock %}
