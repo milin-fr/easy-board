@@ -107,4 +107,17 @@ class ApiController extends AbstractController
 
         return $this->json($task, 200, [], ['groups' => 'get:tasks']);
     }
+
+    /**
+     * @Route("/task-put/{id<\d+>}", name="task_put", methods={"PUT"})
+     */
+    public function taskPut($id, Request $request, EntityManagerInterface $em, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $taskTitle = $contentObject->taskTitle;
+        $task->setTitle($taskTitle);
+        $em->flush();
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
+    }
 }

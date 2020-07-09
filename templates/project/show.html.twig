@@ -19,8 +19,8 @@
 		<ul class="task--list-container">
 			{% for task in project.tasks %}
 				{% if task.taskStatus == taskStatus %}
-					<li class="task--list-item" draggable="true" data-task-id="{{ task.id }}">
-                    <form class="task--title-form" action="">
+					<li class="task--list-item" draggable="true" data-task-id="{{ task.id }}" id="task-{{ task.id }}-item">
+                    <form class="task--list-form" action="{{ path('task_put', {'id': task.id}) }}">
                     <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                     <input type="submit" class="input--submit-task-change hidden" value="Ok">
                     </form>
@@ -32,7 +32,7 @@
 								<option value="{{ user.id }}" data-color="{{ user.color }}" style="background-color:{{ user ? user.color : "#ffffff" }}" {{ task.user == user ? "selected" : "" }}>{{ user.displayName }}</option>
 							{% endfor %}
 						</select>
-                        <i class="fas fa-edit button--edit-task" data-project-id="{{ project.id }}"></i>
+                        <i class="fas fa-edit button--edit-task" data-task-id="{{ task.id }}"></i>
                         <i class="fas fa-arrows-alt"></i>
 					</li>
 				{% endif %}

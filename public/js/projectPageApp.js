@@ -5,7 +5,10 @@ var app = {
       });
       document.querySelector(".newTask").addEventListener("submit", app.newTask);
       document.querySelectorAll(".button--edit-task").forEach(element => {
-        element.addEventListener("click", app.editProjectButton);
+        element.addEventListener("click", app.editTaskButton);
+      });
+      document.querySelectorAll(".task--list-form").forEach(element => {
+        element.addEventListener("submit", app.editTaskSubmit);
       });
       document.querySelectorAll(".task--list-item").forEach(element => {
         element.addEventListener("dragstart", app.dragStart);
@@ -16,6 +19,36 @@ var app = {
         element.addEventListener("dragenter", app.dragEnter);
         element.addEventListener("dragleave", app.dragLeave);
         element.addEventListener("drop", app.dragDrop);
+      });
+    },
+    editTaskButton: function(event) {
+      const taskId = event.target.dataset.taskId;
+      const taskListItem = document.querySelector("#task-" + taskId + "-item");
+      console.log(taskListItem);
+      taskListItem.querySelector(".input--title").readOnly = false;
+      taskListItem.querySelector("input[type='submit']").classList.remove("hidden");
+      event.target.classList.add("hidden");
+    },
+    editTaskSubmit: function(event) {
+      event.preventDefault();
+      const url = this.action;
+      axios.put(url, {
+        "taskTitle": this.querySelector('input[name="taskTitle"]').value,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      document.querySelectorAll(".input--title").forEach(element => {
+        element.readOnly = true;
+      }); 
+      document.querySelectorAll(".input--submit-task-change").forEach(element => {
+        element.classList.add("hidden");
+      });
+      document.querySelectorAll(".button--edit-task").forEach(element => {
+        element.classList.remove("hidden");
       });
     },
     updateTaskStatus: function(event) {
