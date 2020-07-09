@@ -75,31 +75,14 @@ class ApiController extends AbstractController
     public function taskStatusUpdate(Request $request, EntityManagerInterface $em, TaskRepository $taskRepository, TaskStatusRepository $taskStatusRepository)
     {
         $contentObject = json_decode($request->getContent());
-        $project = $projectRepository->find($contentObject->projectId);
+        $task = $taskRepository->find($contentObject->taskId);
         // $oldProjectStatus = $project->getProjectStatus();
-        $newProjectStatus = $projectStatusRepository->find($contentObject->statusId);
+        $newTaskStatus = $taskStatusRepository->find($contentObject->statusId);
         // $oldProjectStatus->removeProject($project);
         // $newProjectStatus->addProject($project);
-        $project->setProjectStatus($newProjectStatus);
+        $task->setTaskStatus($newTaskStatus);
         $em->flush();
-        return $this->json($project, 200, [], ['groups' => 'get:projects']);
-    }
-
-    /**
-     * @Route("/task-status-put/{id<\d+>}", name="task_status_put", methods={"PUT"})
-     */
-    public function task_status_put($id, TaskRepository $taskRepository, Request $request, EntityManagerInterface $em, TaskStatusRepository $taskStatusRepository)
-    {
-        $task = $taskRepository->find($id);
-
-        $contentObject = json_decode($request->getContent());
-        $taskStatus = $taskStatusRepository->find($contentObject->taskStatusId);
-        $task->setTaskStatus($taskStatus);
-
-        $em->flush();
-
-        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
-
+        return $this->json($task, 200, [], ['groups' => 'get:projects']);
     }
 
     /**
