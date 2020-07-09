@@ -60,10 +60,7 @@ class ApiController extends AbstractController
     {
         $contentObject = json_decode($request->getContent());
         $project = $projectRepository->find($contentObject->projectId);
-        // $oldProjectStatus = $project->getProjectStatus();
         $newProjectStatus = $projectStatusRepository->find($contentObject->statusId);
-        // $oldProjectStatus->removeProject($project);
-        // $newProjectStatus->addProject($project);
         $project->setProjectStatus($newProjectStatus);
         $em->flush();
         return $this->json($project, 200, [], ['groups' => 'get:projects']);
@@ -76,13 +73,10 @@ class ApiController extends AbstractController
     {
         $contentObject = json_decode($request->getContent());
         $task = $taskRepository->find($contentObject->taskId);
-        // $oldProjectStatus = $project->getProjectStatus();
         $newTaskStatus = $taskStatusRepository->find($contentObject->statusId);
-        // $oldProjectStatus->removeProject($project);
-        // $newProjectStatus->addProject($project);
         $task->setTaskStatus($newTaskStatus);
         $em->flush();
-        return $this->json($task, 200, [], ['groups' => 'get:projects']);
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
     }
 
     /**

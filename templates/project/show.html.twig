@@ -19,7 +19,7 @@
 		<ul class="task--list-container">
 			{% for task in project.tasks %}
 				{% if task.taskStatus == taskStatus %}
-					<li class="task--list-item" draggable="true">
+					<li class="task--list-item" draggable="true" data-task-id="{{ task.id }}">
                     <form class="task--title-form" action="">
                     <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                     <input type="submit" class="input--submit-task-change hidden" value="Ok">

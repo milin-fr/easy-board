@@ -92,10 +92,10 @@ var app = {
       event.target.classList.remove("hovered");
     },
     dragDrop: function(event) {
-      const url = document.querySelector(".project--container").dataset.updateStatusUrl;
+      const url = document.querySelector(".task--container").dataset.updateStatusUrl;
       axios.put(url, {
-        "projectId": document.querySelector('.dragged-element').dataset.projectId,
-        "statusId": event.target.dataset.projectStatusId
+        "taskId": document.querySelector('.dragged-element').dataset.taskId,
+        "statusId": event.target.dataset.taskStatusId
       })
       .then(function (response) {
         document.location.reload(true);
