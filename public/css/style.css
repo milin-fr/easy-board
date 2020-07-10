@@ -22,7 +22,6 @@ i
 .task--list-item,
 .project--list-item
 {
-    width: 50%;
     margin: 10px;
     border: solid white 4px;
 }
@@ -42,7 +41,7 @@ i
 
 .input--title
 {
-    width: 12rem;
+    width: 8rem;
 }
 
 .input--description

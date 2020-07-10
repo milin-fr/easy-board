@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+<div class="container">
     <form class="newProject" action="{{ path('project_post') }}">
         <input type="text" name="projectTitle" placeholder="Titre du projet">
         <input type="text" name="projectDescription" placeholder="Description du projet">
@@ -33,7 +34,7 @@
     {% else %}
             Les etapes de projet n'ont pas été definis. <a href="{{ path('project_status_new') }}">Definir les etapes</a>.
     {% endfor %}
-
+</div>
 {% block javascripts %}
     <script src="{{ asset('js/homeApp.js') }}"></script>
 {% endblock %}

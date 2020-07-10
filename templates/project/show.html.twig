@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
 	<h1>{{ project.title }}</h1>
 		<form class="newTask" action="{{ path('task_post') }}" data-project-id={{ project.id }}>
 		<label for="task-name">Ajouter une tache :</label>
@@ -41,7 +42,7 @@
 			{% endfor %}
 		</ul>
 	{% endfor %}
-
+</div>
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('js/projectPageApp.js') }}"></script>
