@@ -86,8 +86,21 @@ class ApiController extends AbstractController
     {
         $task = $taskRepository->find($id);
         $contentObject = json_decode($request->getContent());
-        $taskSUser = $userRepository->find($contentObject->userId);
-        $task->setUser($taskSUser);
+        $taskUser = $userRepository->find($contentObject->userId);
+        $task->setUser($taskUser);
+        $em->flush();
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
+    }
+
+    /**
+     * @Route("/task-user-update", name="task_user_update", methods={"PUT"})
+     */
+    public function task_user_update(TaskRepository $taskRepository, Request $request, EntityManagerInterface $em, UserRepository $userRepository)
+    {
+        $contentObject = json_decode($request->getContent());
+        $task = $taskRepository->find($contentObject->taskId);
+        $taskUser = $userRepository->find($contentObject->userId);
+        $task->setUser($taskUser);
         $em->flush();
         return $this->json($task, 200, [], ['groups' => 'get:tasks']);
     }

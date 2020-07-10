@@ -105,14 +105,9 @@ var app = {
         element.classList.remove("dragged-element");
        });
       event.target.classList.add("dragged-element");
-      //setTimeout(() => event.target.classList.add("hidden"), 1);
-      //document.querySelectorAll(".drag-and-drop--landing").forEach(element => {
-      //  element.classList.add("drag-and-drop--active");
-      //});
     },
     dragEnd: function(event) {
       event.target.classList.remove("hold");
-      //event.target.classList.remove("hidden");
       document.querySelectorAll(".drag-and-drop--landing").forEach(element => {
         element.classList.remove("drag-and-drop--active");
       });
