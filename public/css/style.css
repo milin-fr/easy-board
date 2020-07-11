@@ -131,3 +131,18 @@ i
     width: 33%;
     padding: 10px;
 }
+
+.navigation--bar
+{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.navigation--item
+{
+    margin: 10px;
+    text-transform: uppercase;
+}

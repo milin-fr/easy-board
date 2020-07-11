@@ -10,12 +10,8 @@
     </head>
     <body>
     <nav class="navigation--bar">
-        <div class="navigation--item">
-            <a href="{{ path('home') }}">Projets</a>
-        </div>
-        <div class="navigation--item">
-            <a href="{{ path('user_index') }}">Equipe</a>
-        </div>
+        <a class="navigation--item" href="{{ path('home') }}">Projets</a>
+        <a class="navigation--item" href="{{ path('user_index') }}">Equipe</i></a>
     </nav>
         {% block body %}{% endblock %}
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
