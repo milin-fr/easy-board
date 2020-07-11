@@ -21,6 +21,9 @@ var app = {
       document.querySelectorAll(".task--list-form").forEach(element => {
         element.addEventListener("submit", app.editTaskSubmit);
       });
+      document.querySelectorAll(".taskStatus").forEach(function(link){
+        link.addEventListener("change", app.updateTaskStatus);
+      });
     },
     dragStart: function(event) {
       event.target.classList.add("hold");
@@ -88,6 +91,22 @@ var app = {
       document.querySelectorAll(".button--edit-task").forEach(element => {
         element.classList.remove("hidden");
       });
+    },
+    updateTaskStatus: function(event) {
+      const url = this.dataset.action;
+      axios.put(url, {
+        "statusId": this.value,
+        "taskId": this.dataset.taskId
+      })
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+      this.style.backgroundColor = this.selectedOptions[0].dataset.color;
     }
 };
   

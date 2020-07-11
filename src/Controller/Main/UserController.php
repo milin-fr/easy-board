@@ -5,6 +5,7 @@ namespace App\Controller\Main;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\ProjectRepository;
+use App\Repository\TaskStatusRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +20,12 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository, ProjectRepository $projectRepository): Response
+    public function index(UserRepository $userRepository, ProjectRepository $projectRepository, TaskStatusRepository $taskStatusRepository): Response
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
-            'projects' => $projectRepository->findAll()
+            'projects' => $projectRepository->findAll(),
+            'statuses' => $taskStatusRepository->findAll()
         ]);
     }
 
