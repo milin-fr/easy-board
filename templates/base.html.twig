@@ -9,6 +9,14 @@
         {% endblock %}
     </head>
     <body>
+    <nav class="navigation--bar">
+        <div class="navigation--item">
+            <a href="{{ path('home') }}">Projets</a>
+        </div>
+        <div class="navigation--item">
+            <a href="{{ path('user_index') }}">Equipe</a>
+        </div>
+    </nav>
         {% block body %}{% endblock %}
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         {% block javascripts %}

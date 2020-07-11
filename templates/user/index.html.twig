@@ -17,7 +17,12 @@
                             <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                             <input type="submit" class="input--submit-task-change hidden" value="Ok">
                             </form>
-                            {{ task.title }} : {{ task.taskStatus.title }}
+                            <select>
+                            {% for user in users %}
+                              <option value="{{ user.id }}" data-color="{{ user.color }}" style="background-color:{{ user ? user.color : "#ffffff" }}" {{ task.user == user ? "selected" : "" }}>{{ user.displayName }}</option>
+                            {% endfor %}
+                            </select>
+                            {{ task.taskStatus.title }}
                             <i class="fas fa-edit button--edit-task" data-task-id="{{ task.id }}"></i>
                             <i class="fas fa-arrows-alt"></i>
                         </li>
