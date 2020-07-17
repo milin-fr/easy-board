@@ -17,7 +17,7 @@
     <div class="project--container" data-update-status-url="{{ path('project_status_update') }}">
     <ul class="project--list-container">
     {% for project in projectStatus.projects %}
-        <li class="project--list-item" id="project-{{ project.id }}-item" draggable="true" data-project-id="{{ project.id }}">
+        <li class="project--list-item" id="project-{{ project.id }}-item" draggable="false" data-project-id="{{ project.id }}">
         <form action="{{ path('project_put', {'id': project.id}) }}" class="project--list-form" method="put">
             <input type="text" name="title" class="input--title" value="{{ project.title }}" readonly>
             <input type="text" name="description" class="input--description" value="{{ project.description }}" readonly>

@@ -17,6 +17,9 @@ var app = {
         element.addEventListener("dragleave", app.dragLeave);
         element.addEventListener("drop", app.dragDrop);
       });
+      document.querySelectorAll(".fa-arrows-alt").forEach(element => {
+        element.addEventListener("mousedown", app.makeDraggable);
+      });
     },
     addProject: function(event) {
       event.preventDefault();
@@ -83,6 +86,7 @@ var app = {
       //event.target.classList.remove("hidden");
       document.querySelectorAll(".drag-and-drop--landing").forEach(element => {
         element.classList.remove("drag-and-drop--active");
+        app.unmakeDraggable();
       });
     },
     dragOver: function(event) {
@@ -107,6 +111,16 @@ var app = {
       })
       .catch(function (error) {
         console.log(error);
+      });
+    },
+    makeDraggable: function() {
+      document.querySelectorAll(".project--list-item").forEach(element => {
+        element.setAttribute('draggable', true);
+      });
+    },
+    unmakeDraggable: function() {
+      document.querySelectorAll(".project--list-item").forEach(element => {
+        element.setAttribute('draggable', false);
       });
     }
 };
