@@ -24,6 +24,9 @@ var app = {
       document.querySelectorAll(".taskStatus").forEach(function(link){
         link.addEventListener("change", app.updateTaskStatus);
       });
+      document.querySelectorAll(".fa-arrows-alt").forEach(element => {
+        element.addEventListener("mousedown", app.makeDraggable);
+      });
     },
     dragStart: function(event) {
       event.target.classList.add("hold");
@@ -36,6 +39,7 @@ var app = {
       event.target.classList.remove("hold");
       document.querySelectorAll(".drag-and-drop--landing").forEach(element => {
         element.classList.remove("drag-and-drop--active");
+        element.addEventListener("dragend", app.dragEnd);
       });
     },
     dragOver: function(event) {
@@ -107,6 +111,16 @@ var app = {
         console.log(error);
       });
       this.style.backgroundColor = this.selectedOptions[0].dataset.color;
+    },
+    makeDraggable: function() {
+      document.querySelectorAll(".task--list-item").forEach(element => {
+        element.setAttribute('draggable', true);
+      });
+    },
+    unmakeDraggable: function() {
+      document.querySelectorAll(".task--list-item").forEach(element => {
+        element.setAttribute('draggable', false);
+      });
     }
 };
   
