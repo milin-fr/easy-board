@@ -17,6 +17,9 @@ var app = {
         element.addEventListener("dragleave", app.dragLeave);
         element.addEventListener("drop", app.dragDrop);
       });
+      document.querySelectorAll(".fa-trash-alt").forEach(function(link){
+        link.addEventListener("click", app.deleteProject);
+      });
       document.querySelectorAll(".fa-arrows-alt").forEach(element => {
         element.addEventListener("mousedown", app.makeDraggable);
       });
@@ -112,6 +115,21 @@ var app = {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    deleteProject: function(event) {
+      if (confirm("Supprimer le projet?")){
+        const url = event.target.dataset.deleteUrl;
+        axios.delete(url, {
+        }).then(function (response) {
+          document.location.reload(true);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }else{
+        console.log("nay");
+      }
     },
     makeDraggable: function() {
       document.querySelectorAll(".project--list-item").forEach(element => {

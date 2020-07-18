@@ -144,4 +144,15 @@ class ApiController extends AbstractController
         $em->flush();
         return $this->json(null, 200, [], []);
     }
+
+    /**
+     * @Route("/project-delete/{id<\d+>}", name="api_project_delete", methods={"DELETE"})
+     */
+    public function projectDelete($id, EntityManagerInterface $em, ProjectRepository $projectRepository)
+    {
+        $project = $projectRepository->find($id);
+        $em->remove($project);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
 }
