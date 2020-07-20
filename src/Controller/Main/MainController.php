@@ -35,4 +35,15 @@ class MainController extends AbstractController
             'folders' => $folders,
         ]);
     }
+
+    /**
+     * @Route("/{id<\d+>}", name="folder_show", methods={"GET"})
+     */
+    public function show($id, FolderRepository $folderRepository)
+    {
+        $folder = $folderRepository->find($id);
+        return $this->render('project/show.html.twig', [
+            'folder' => $folder,
+        ]);
+    }
 }
