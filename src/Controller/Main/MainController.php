@@ -4,6 +4,7 @@ namespace App\Controller\Main;
 
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Repository\FolderRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +22,17 @@ class MainController extends AbstractController
         $projectStatuses = $projectStatusRepository->findAll();
         return $this->render('main/home.html.twig', [
             'projectStatuses' => $projectStatuses,
+        ]);
+    }
+
+    /**
+     * @Route("/folders", name="folders")
+     */
+    public function folders(FolderRepository $folderRepository)
+    {
+        $folders = $folderRepository->findAll();
+        return $this->render('main/folders.html.twig', [
+            'folders' => $folders,
         ]);
     }
 }
