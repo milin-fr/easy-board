@@ -145,3 +145,19 @@ i
     margin: 10px;
     text-transform: uppercase;
 }
+
+#file--drop-zone
+{
+    width: 300px;
+    height: 300px;
+    border: 2px dashed #ccc;
+    color: #ccc;
+    line-height: 300px;
+    text-align: center;
+}
+
+#file--drop-zone.dragover
+{
+    border-color: #000;
+    color: #000;
+}

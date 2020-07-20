@@ -37,12 +37,12 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="folder_show", methods={"GET"})
+     * @Route("/folders/{id<\d+>}", name="folder_show", methods={"GET"})
      */
     public function show($id, FolderRepository $folderRepository)
     {
         $folder = $folderRepository->find($id);
-        return $this->render('project/show.html.twig', [
+        return $this->render('main/folder.html.twig', [
             'folder' => $folder,
         ]);
     }

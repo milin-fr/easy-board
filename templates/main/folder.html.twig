@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Folders{% endblock %}
+{% block title %}{{ folder.title }}{% endblock %}
 
 {% block body %}
-
+    <div id="file--drop-zone">
+        Déplacez le fichier ici pour le sauvegarder.
+    </div>
+    <div class="file--uploads">
+    </div>
 {% block javascripts %}
-    <script src="{{ asset('js/homeApp.js') }}"></script>
+    <script src="{{ asset('js/folderApp.js') }}"></script>
 {% endblock %}
 {% endblock %}
