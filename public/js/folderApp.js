@@ -18,37 +18,22 @@ var app = {
     },
     dragDrop: function(event) {
       event.preventDefault();
-      event.dataTransfer.files.forEach(file => {
+      const url = event.target.dataset.uploadUrl;
+      const folderId = event.target.dataset.folderId;
+      [...event.dataTransfer.files].forEach(file => {
         const formData = new FormData();
-        formData.append("file", file);
-        const url;
+        formData.append("file", "file");
+        formData.append("folderId", folderId);
         axios.post(url, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
-        }).then(function () {
-          document.location.reload(true);
+        }).then(function (response) {
+          console.log(response);
         })
-        .catch(function () {
-          console.log('FAILURE!!');
+        .catch(function (error) {
+          console.log(error);
         });
-      });
-
-      console.log(event.dataTransfer.files);
-      return;
-      const url = document.querySelector(".project--container").dataset.updateStatusUrl;
-
-      
-      axios.put(url, {
-        "projectId": document.querySelector('.dragged-element').dataset.projectId,
-        "statusId": event.target.dataset.projectStatusId
-      })
-      .then(function (response) {
-        document.location.reload(true);
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
     },
 };

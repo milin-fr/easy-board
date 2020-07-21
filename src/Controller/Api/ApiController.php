@@ -4,7 +4,8 @@ namespace App\Controller\Api;
 
 use App\Entity\Project;
 use App\Entity\Task;
-use App\Form\ProjectType;
+use App\Entity\UploadedFile;
+use App\Form\UploadedFileType;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
 use App\Repository\TaskRepository;
@@ -154,5 +155,26 @@ class ApiController extends AbstractController
         $em->remove($project);
         $em->flush();
         return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/file-upload", name="api_file_upload", methods={"POST"})
+     */
+    public function fileUpload(Request $request)
+    {
+        $newFile = new UploadedFile();
+        $form = $this->createForm(UploadedFileType::class, $newFile);
+        $form->submit($request->request->all());
+        if($form->isSubmitted())
+        {
+            dd("form recieved");
+        // $newFile = new UploadedFile();
+        $contentObject = json_decode($request->getContent());
+        dd($contentObject->file);
+        $uploadedFile = $contentObject->file;
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        dd($originalFilename);
+        }
+        dd(json_decode($request->getContent(), true));
     }
 }
