@@ -152,6 +152,10 @@ class ApiController extends AbstractController
     public function projectDelete($id, EntityManagerInterface $em, ProjectRepository $projectRepository)
     {
         $project = $projectRepository->find($id);
+        $tasks = $project->getTasks();
+        foreach($tasks as $task){
+            $em->remove($task);
+        }
         $em->remove($project);
         $em->flush();
         return $this->json(null, 200, [], []);
