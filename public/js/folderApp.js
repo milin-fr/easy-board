@@ -19,21 +19,19 @@ var app = {
     dragDrop: function(event) {
       event.preventDefault();
       const url = event.target.dataset.uploadUrl;
-      const folderId = event.target.dataset.folderId;
+      const formData = new FormData();
       [...event.dataTransfer.files].forEach(file => {
-        const formData = new FormData();
         formData.append("file", "file");
-        formData.append("folderId", folderId);
-        axios.post(url, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      });
+      axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
     },
 };

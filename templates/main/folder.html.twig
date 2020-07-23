@@ -3,7 +3,7 @@
 {% block title %}{{ folder.title }}{% endblock %}
 
 {% block body %}
-    <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload') }}" data-folder-id="{{ folder.id }}">
+    <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload', {'id': folder.id}) }}">
         Déplacez le fichier ici pour le sauvegarder.
     </div>
     <div class="file--uploads">

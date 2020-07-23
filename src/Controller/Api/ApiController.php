@@ -162,23 +162,15 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/file-upload", name="api_file_upload", methods={"POST"})
+     * @Route("/file-upload/{id<\d+>}", name="api_file_upload", methods={"POST"})
      */
-    public function fileUpload(Request $request)
+    public function fileUpload($id, Request $request)
     {
-        $newFile = new UploadedFile();
-        $form = $this->createForm(UploadedFileType::class, $newFile);
-        $form->submit($request->request->all());
-        if($form->isSubmitted())
-        {
-            dd("form recieved");
-        // $newFile = new UploadedFile();
-        $contentObject = json_decode($request->getContent());
-        dd($contentObject->file);
-        $uploadedFile = $contentObject->file;
-        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        dd($originalFilename);
+        foreach($_FILES as $uploadedFile){
+            // $newFile = new UploadedFile();
+            $newPath = $this->getParameter('upload_directory')."/".$uploadedFile["name"];
+            move_uploaded_file($uploadedFile["tmp_name"], "$newPath");
         }
-        dd(json_decode($request->getContent(), true));
+        return $this->json(null, 200, [], []);
     }
 }
