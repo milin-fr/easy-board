@@ -6,7 +6,7 @@
     <div class="folder-page--container">
     <div class="file--uploads">
     {% for file in folder.uploadedFiles %}
-        <div>{{ file.filePath }}</div>
+        <a href="{{ path('api_file_download', {'id': file.id}) }}">{{ file.filePath }}</a>
     {% endfor %}
     </div>    
     <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload', {'id': folder.id}) }}">
