@@ -11,11 +11,14 @@ use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
 use App\Repository\TaskRepository;
 use App\Repository\TaskStatusRepository;
+use App\Repository\UploadedFileRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -179,5 +182,17 @@ class ApiController extends AbstractController
         }
         $em->flush();
         return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/file-download/{id<\d+>}", name="api_file_download", methods={"GET"})
+     */
+    public function fileDownload($id, UploadedFileRepository $uploadedFileRepository)
+    {
+        $file = $uploadedFileRepository->find($id);
+        $filePath = $this->getParameter('upload_directory')."/".$file->getFilePath();
+        $response = new BinaryFileResponse($filePath);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilePath());
+        return $response;
     }
 }

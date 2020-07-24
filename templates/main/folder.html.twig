@@ -3,10 +3,15 @@
 {% block title %}{{ folder.title }}{% endblock %}
 
 {% block body %}
+    <div class="folder-page--container">
+    <div class="file--uploads">
+    {% for file in folder.uploadedFiles %}
+        <div>{{ file.filePath }}</div>
+    {% endfor %}
+    </div>    
     <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload', {'id': folder.id}) }}">
         Déplacez le fichier ici pour le sauvegarder.
     </div>
-    <div class="file--uploads">
     </div>
 {% endblock %}
 {% block javascripts %}
