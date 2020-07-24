@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Folders{% endblock %}
+{% block title %}Dossiers{% endblock %}
 
 {% block body %}
+<h1 class="page--title">Dossiers</h1>
+<div class="container">
+{% for folder in folders %}
+<a class="folder--single-line" href="http://"><div class="folder--icon">{{ folder.title }}</div></a>
+    
+
+{% endfor %}
+</div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/homeApp.js') }}"></script>

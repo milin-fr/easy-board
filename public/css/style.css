@@ -1,3 +1,4 @@
+.folder-page--container,
 .container
 {
     width: 80%;
@@ -154,10 +155,73 @@ i
     color: #ccc;
     line-height: 300px;
     text-align: center;
+    margin-left: auto;
 }
 
 #file--drop-zone.dragover
 {
     border-color: #000;
     color: #000;
+}
+
+.folder-page--container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.file--drop-zone,
+.file--uploads
+{
+    width: 50%;
+}
+
+.file--uploads
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.file--single-line
+{
+    margin: 0.5rem 0;
+}
+
+.page--title
+{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.folder--single-line
+{
+    text-decoration: none;
+    color: #000;
+}
+.folder--single-line:hover
+{
+    text-decoration: underline;
+}
+
+.folder--icon {
+    width: 150px;
+    height: 105px;
+    line-height: 105px;
+    position: relative;
+    background-color: #f8c327;
+    border-radius: 0 6px 6px 6px;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+    text-align: center;
+
+}
+
+.folder--icon:before {
+    content: '';
+    width: 50%;
+    height: 12px;
+    border-radius: 0 20px 0 0;
+    background-color: #f8c327;
+    position: absolute;
+    top: -12px;
+    left: 0px;
 }
