@@ -6,7 +6,7 @@
 <h1 class="page--title">Dossiers</h1>
 <div class="container">
 {% for folder in folders %}
-<a class="folder--single-line" href="http://"><div class="folder--icon">{{ folder.title }}</div></a>
+<a class="folder--single-line" href="{{ path('folder_show', {'id': folder.id}) }}"><div class="folder--icon">{{ folder.title }}</div></a>
     
 
 {% endfor %}
