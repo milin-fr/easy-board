@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\Task;
 use App\Entity\UploadedFile;
 use App\Form\UploadedFileType;
+use App\Repository\FolderRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
 use App\Repository\TaskRepository;
@@ -164,12 +165,18 @@ class ApiController extends AbstractController
     /**
      * @Route("/file-upload/{id<\d+>}", name="api_file_upload", methods={"POST"})
      */
-    public function fileUpload($id, Request $request)
+    public function fileUpload($id, FolderRepository $folderRepository, EntityManagerInterface $em)
     {
+        $folder = $folderRepository->find($id);
         foreach($_FILES as $uploadedFile){
-            // $newFile = new UploadedFile();
             $newPath = $this->getParameter('upload_directory')."/".$uploadedFile["name"];
-            move_uploaded_file($uploadedFile["tmp_name"], "$newPath");
+            if(move_uploaded_file($uploadedFile["tmp_name"], "$newPath")){
+                $newFile = new UploadedFile();
+                $newFile->setFilePath($newPath);
+                $em->persist($newFile);
+                $folder->addUploadedFile($newFile);
+            }
+            $em->flush();
         }
         return $this->json(null, 200, [], []);
     }

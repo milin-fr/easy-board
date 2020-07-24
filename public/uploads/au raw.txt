@@ -1,0 +1,25 @@
+27/03/2020
+- integrated "about us" page
+- integrated "contact us" page
+- integrated "faq" page
+- integrated "delivery information" page
+- integrated "payment information" page
+- integrated and partialy dynamised "cakes list" page (missing image managment)
+- integrated and partialy dynamised "chocolates list" page (missing image managment)
+- integrated and partialy dynamised "single product" page (missing image managment)
+Difficulties: N/A
+
+26/03/2020
+- created fixtures
+- integrated static homepage to symfony project
+- partialy dynamising information on home page (missing image managment)
+Difficulties: N/A
+
+25/03/2020
+- initial symfo setup
+- creation of entrities and migration
+Difficulties: N/A
+
+
+
+
