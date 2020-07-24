@@ -1,0 +1,28 @@
+Formation labellisée Grande École du Numérique en trois phases :
+
+► Socle de connaissances :
+- Langages structurels : HTML et CSS
+- Langages de programmation : PHP et JavaScript
+- Langage de requête : SQL
+- Paradigme : POO
+- Phase de conception de site : user stories et wireframes
+- Méthodologie de travail : sprints
+- Architecture : MVC
+- API : CORS, requêtes Ajax
+- Framework back-end et ORM : Lumen et Eloquent
+- Outil : Postman
+- WordPress
+- Versionning et hébergement de code : Git et GitHub
+
+► Spécialisation :
+- Paradigme : programmation déclarative
+- Bibliothèques : React, Redux, PropTypes, emotion (CSS-in-JS)
+- TDD : sensibilisation à Mocha, Chai, Enzyme
+- Socket.IO
+
+► Projet professionnel :
+- conception et développement d'un réseau social autour des séries
+- équipe de 4 membres
+- démonstration vidéo de l'application : http://bit.ly/TV-show-social-network
+
+Formation sous Linux. Utilisation de l'éditeur Visual Studio Code.

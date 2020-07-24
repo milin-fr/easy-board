@@ -168,16 +168,16 @@ class ApiController extends AbstractController
     public function fileUpload($id, FolderRepository $folderRepository, EntityManagerInterface $em)
     {
         $folder = $folderRepository->find($id);
-        foreach($_FILES as $uploadedFile){
-            $newPath = $this->getParameter('upload_directory')."/".$uploadedFile["name"];
-            if(move_uploaded_file($uploadedFile["tmp_name"], "$newPath")){
+        foreach($_FILES["files"]["name"] as $index => $fileName){
+            $newPath = $this->getParameter('upload_directory')."/".$fileName;
+            if(move_uploaded_file($_FILES["files"]["tmp_name"][$index], "$newPath")){
                 $newFile = new UploadedFile();
-                $newFile->setFilePath($newPath);
+                $newFile->setFilePath($fileName);
                 $em->persist($newFile);
                 $folder->addUploadedFile($newFile);
             }
-            $em->flush();
         }
+        $em->flush();
         return $this->json(null, 200, [], []);
     }
 }

@@ -21,14 +21,11 @@ var app = {
       const url = event.target.dataset.uploadUrl;
       const formData = new FormData();
       [...event.dataTransfer.files].forEach(file => {
-        formData.append("file", "file");
+        formData.append("files[]", file);
       });
-      axios.post(url, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        console.log(response);
+      axios.post(url, formData)
+      .then(function (response) {
+        document.location.reload(true);
       })
       .catch(function (error) {
         console.log(error);
