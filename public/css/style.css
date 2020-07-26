@@ -197,6 +197,8 @@ i
 {
     text-decoration: none;
     color: #000;
+    margin-top: 50px;
+    margin-left: 50px;
 }
 .folder--single-line:hover
 {
@@ -204,8 +206,6 @@ i
 }
 
 .folder--icon {
-    margin-top: 50px;
-    margin-left: 50px;
     width: 150px;
     height: 105px;
     position: relative;

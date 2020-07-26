@@ -12,10 +12,7 @@
         </div>
     {% else %}
         <div>Ce dossier est vide. Vous pouvez le supprimer : 
-        <form class="folder--delete-form" action="{{ path('api_folder_delete', {'id': folder.id}) }}" data-redirect-url="{{ path('folders') }}">
-        <label for="submit"><i class="fas fa-trash-alt fa-2x"></i></label>
-        <input type="submit" value="" id="submit">
-        </form>
+        <i class="fas fa-trash-alt fa-2x" data-delete-url="{{ path('api_folder_delete', {'id': folder.id}) }}" data-redirect-url="{{ path('folders') }}"></i>
         </div>
     {% endfor %}
     </div>    

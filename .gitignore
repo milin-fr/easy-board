@@ -16,3 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 ovh.txt
+/public/uploads/*

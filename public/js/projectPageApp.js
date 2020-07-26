@@ -57,18 +57,6 @@ var app = {
         element.classList.remove("hidden");
       });
     },
-    updateTaskStatus: function(event) {
-      const url = this.dataset.action;
-      axios.put(url, {
-        "taskStatusId": this.value
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    },
     updateTaskUser: function(event) {
       const url = this.dataset.action;
       console.log(this.value);
