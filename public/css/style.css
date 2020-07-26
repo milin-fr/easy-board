@@ -204,9 +204,10 @@ i
 }
 
 .folder--icon {
+    margin-top: 50px;
+    margin-left: 50px;
     width: 150px;
     height: 105px;
-    line-height: 105px;
     position: relative;
     background-color: #f8c327;
     border-radius: 0 6px 6px 6px;
@@ -224,4 +225,21 @@ i
     position: absolute;
     top: -12px;
     left: 0px;
+}
+
+.folder--container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.folder--delete-form
+{
+    display: inline;
+}
+
+.folder--delete-form > input
+{
+    display: none;
 }

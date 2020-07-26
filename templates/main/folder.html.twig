@@ -10,6 +10,13 @@
         <div class="file--single-line">
             <a href="{{ path('api_file_download', {'id': file.id}) }}">{{ file.filePath }}</a>
         </div>
+    {% else %}
+        <div>Ce dossier est vide. Vous pouvez le supprimer : 
+        <form class="folder--delete-form" action="{{ path('api_folder_delete', {'id': folder.id}) }}" data-redirect-url="{{ path('folders') }}">
+        <label for="submit"><i class="fas fa-trash-alt fa-2x"></i></label>
+        <input type="submit" value="" id="submit">
+        </form>
+        </div>
     {% endfor %}
     </div>    
     <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload', {'id': folder.id}) }}">

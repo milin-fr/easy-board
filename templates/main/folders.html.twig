@@ -5,13 +5,17 @@
 {% block body %}
 <h1 class="page--title">Dossiers</h1>
 <div class="container">
+    <form class="folder--new" action="{{ path('folder_post') }}">
+        <input type="text" name="folderTitle" placeholder="Titre du dossier">
+        <input type="submit" value="Ajouter">
+    </form>
+<div class="folder--container">
 {% for folder in folders %}
 <a class="folder--single-line" href="{{ path('folder_show', {'id': folder.id}) }}"><div class="folder--icon">{{ folder.title }}</div></a>
-    
-
 {% endfor %}
+</div>
 </div>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('js/homeApp.js') }}"></script>
+    <script src="{{ asset('js/foldersApp.js') }}"></script>
 {% endblock %}

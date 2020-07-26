@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Folder;
 use App\Entity\Project;
 use App\Entity\Task;
 use App\Entity\UploadedFile;
@@ -194,5 +195,30 @@ class ApiController extends AbstractController
         $response = new BinaryFileResponse($filePath);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilePath());
         return $response;
+    }
+
+    /**
+     * @Route("/folder-post", name="folder_post", methods={"POST"})
+     */
+    public function folderPost(Request $request, EntityManagerInterface $em)
+    {
+        $folder = new Folder();
+        $contentObject = json_decode($request->getContent());
+        $folderTitle = $contentObject->folderTitle;
+        $folder->setTitle($folderTitle);
+        $em->persist($folder);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/folder-delete/{id<\d+>}", name="api_folder_delete", methods={"DELETE"})
+     */
+    public function folderDelete($id, EntityManagerInterface $em, FolderRepository $folderRepository)
+    {
+        $folder = $folderRepository->find($id);
+        $em->remove($folder);
+        $em->flush();
+        return $this->json(null, 200, [], []);
     }
 }

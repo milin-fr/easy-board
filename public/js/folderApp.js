@@ -5,6 +5,9 @@ var app = {
       dropzone.addEventListener("dragenter", app.dragEnter);
       dropzone.addEventListener("dragleave", app.dragLeave);
       dropzone.addEventListener("drop", app.dragDrop);
+      document.querySelectorAll(".folder--delete-form").forEach(function(element){
+        element.addEventListener("submit", app.deleteFolder);
+      });
     },
     dragOver: function(event) {
       event.preventDefault();
@@ -30,6 +33,22 @@ var app = {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    deleteFolder: function(event) {
+      event.preventDefault();
+      if (confirm("Supprimer le dossier?")){
+        const url = event.target.action;
+        const redirectUrl = event.target.dataset.redirectUrl;
+        axios.delete(url, {
+        }).then(function (response) {
+          window.location.href = redirectUrl;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }else{
+        console.log("nay");
+      }
     },
 };
 
