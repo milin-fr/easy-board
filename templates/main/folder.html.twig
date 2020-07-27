@@ -15,10 +15,11 @@
     {% for file in folder.uploadedFiles %}
         <div class="file--single-line">
             <a href="{{ path('api_file_download', {'id': file.id}) }}">{{ file.filePath }}</a>
+            <i class="fas fa-trash-alt file--delete" data-delete-url="{{ path('api_file_delete', {'id': file.id}) }}"></i>
         </div>
     {% else %}
         <div>Ce dossier est vide. Vous pouvez le supprimer : 
-        <i class="fas fa-trash-alt fa-2x" data-delete-url="{{ path('api_folder_delete', {'id': folder.id}) }}" data-redirect-url="{{ path('folders') }}"></i>
+        <i class="fas fa-trash-alt fa-2x folder--delete" data-delete-url="{{ path('api_folder_delete', {'id': folder.id}) }}" data-redirect-url="{{ path('folders') }}"></i>
         </div>
     {% endfor %}
     </div>    

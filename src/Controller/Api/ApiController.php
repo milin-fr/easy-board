@@ -207,7 +207,8 @@ class ApiController extends AbstractController
         $filePath = $this->getParameter('upload_directory')."/".$file->getFilePath();
         $filesystem = new Filesystem();
         $filesystem->remove($filePath);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilePath());
+        $em->remove($file);
+        $em->flush();
         return $this->json(null, 200, [], []);
     }
 

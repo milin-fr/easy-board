@@ -5,7 +5,7 @@ var app = {
       dropzone.addEventListener("dragenter", app.dragEnter);
       dropzone.addEventListener("dragleave", app.dragLeave);
       dropzone.addEventListener("drop", app.dragDrop);
-      document.querySelectorAll(".fa-trash-alt").forEach(function(element){
+      document.querySelectorAll(".folder--delete").forEach(function(element){
         element.addEventListener("click", app.deleteFolder);
       });
       document.querySelectorAll(".button--edit-folder").forEach(function(element){
@@ -13,6 +13,9 @@ var app = {
       });
       document.querySelectorAll(".title-form--form").forEach(function(element){
         element.addEventListener("submit", app.editFolder);
+      });
+      document.querySelectorAll(".file--delete").forEach(function(link){
+        link.addEventListener("click", app.deleteFile);
       });
     },
     dragOver: function(event) {
@@ -64,7 +67,7 @@ var app = {
     editFolder: function(event) {
       event.preventDefault();
       const url = this.action;
-      axios.post(url, {
+      axios.put(url, {
         "folderTitle": this.querySelector('input[name="folderTitle"]').value,
       })
       .then(function (response) {
@@ -75,6 +78,21 @@ var app = {
       });
       document.querySelector(".title-form--title-input").disabled = true;
       document.querySelector(".title-form--title-submit").classList.add("hidden");
+    },
+    deleteFile: function(event) {
+      if (confirm("Supprimer le le fichier?")){
+        const url = event.target.dataset.deleteUrl;
+        axios.delete(url, {
+        }).then(function (response) {
+          document.location.reload(true);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }else{
+        console.log("nay");
+      }
     },
 };
 
