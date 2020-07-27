@@ -41,9 +41,11 @@
 						{% if task.checklistItems|length > 0 %}
 						<div class="checklist--container">
 							{% for checklistItem in task.checklistItems %}
-								- {{ checklistItem.title }}
-								<input class="checklist--done" type="checkbox" {{ checklistItem.done == 1 ? 'checked' : '' }} data-done-url="{{ path('api_checklist_done', {'id': checklistItem.id}) }}">
-								<i class="fas fa-trash-alt checklist--delete" data-delete-url="{{ path('api_checklist_delete', {'id': checklistItem.id}) }}"></i>
+								<div class="checklist--line">
+									- {{ checklistItem.title }}
+									<input class="checklist--done" type="checkbox" {{ checklistItem.done == 1 ? 'checked' : '' }} data-done-url="{{ path('api_checklist_done', {'id': checklistItem.id}) }}">
+									<i class="fas fa-trash-alt checklist--delete" data-delete-url="{{ path('api_checklist_delete', {'id': checklistItem.id}) }}"></i>
+								</div>
 							{% endfor %}
 						</div>
 						{% endif %}

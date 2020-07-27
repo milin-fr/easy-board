@@ -27,6 +27,21 @@ var app = {
       document.querySelectorAll(".fa-arrows-alt").forEach(element => {
         element.addEventListener("mousedown", app.makeDraggable);
       });
+      document.querySelectorAll(".fa-plus-square").forEach(element => {
+        element.addEventListener("click", app.checklistForm);
+      });
+      document.querySelectorAll(".button--cancel").forEach(element => {
+        element.addEventListener("click", app.cancelForm);
+      });
+      document.querySelectorAll(".checklist--form").forEach(element => {
+        element.addEventListener("submit", app.addChecklistItem);
+      });
+      document.querySelectorAll(".checklist--delete").forEach(function(link){
+        link.addEventListener("click", app.deleteChecklist);
+      });
+      document.querySelectorAll(".checklist--done").forEach(function(link){
+        link.addEventListener("click", app.toggleChecklist);
+      });
     },
     dragStart: function(event) {
       event.target.classList.add("hold");
@@ -120,6 +135,63 @@ var app = {
     unmakeDraggable: function() {
       document.querySelectorAll(".task--list-item").forEach(element => {
         element.setAttribute('draggable', false);
+      });
+    },
+    checklistForm: function(event) {
+      const taskId = event.target.dataset.taskId;
+      document.querySelector("#checklist-form--" + taskId).classList.remove("hidden");
+    },
+    cancelForm: function(event) {
+      event.preventDefault();
+      document.querySelectorAll(".checklist--form").forEach(element => {
+        element.classList.add("hidden");
+      });
+    },
+    addChecklistItem: function(event) {
+      event.preventDefault();
+      const url = this.action;
+      axios.post(url, {
+        "checklistTitle": event.target.querySelector('[name="checklist-title"]').value,
+      })
+      .then(function (response) {
+        // handle success
+        document.location.reload(true);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    deleteChecklist: function(event) {
+      if (confirm("Supprimer ?")){
+        const url = event.target.dataset.deleteUrl;
+        axios.delete(url, {
+        }).then(function (response) {
+          document.location.reload(true);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }else{
+        console.log("nay");
+      }
+    },
+    toggleChecklist: function(event) {
+      let status = 0;
+      if(event.target.checked == true)
+      {
+        status = 1;
+      }
+      const url = event.target.dataset.doneUrl;
+      axios.put(url, {
+        "checklistDone": status,
+      }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
     }
 };
