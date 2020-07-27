@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ChecklistItemRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class ChecklistItem
 {
@@ -72,4 +73,18 @@ class ChecklistItem
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /** 
+     * @ORM\PrePersist
+     */
+    public function setDoneToZero()
+    {
+        $this->done = 0;
+    }
+
 }
