@@ -16,6 +16,7 @@ use App\Repository\UploadedFileRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -198,6 +199,19 @@ class ApiController extends AbstractController
     }
 
     /**
+     * @Route("/file-delete/{id<\d+>}", name="api_file_delete", methods={"DELETE"})
+     */
+    public function fileDelete($id, UploadedFileRepository $uploadedFileRepository, EntityManagerInterface $em)
+    {
+        $file = $uploadedFileRepository->find($id);
+        $filePath = $this->getParameter('upload_directory')."/".$file->getFilePath();
+        $filesystem = new Filesystem();
+        $filesystem->remove($filePath);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file->getFilePath());
+        return $this->json(null, 200, [], []);
+    }
+
+    /**
      * @Route("/folder-post", name="folder_post", methods={"POST"})
      */
     public function folderPost(Request $request, EntityManagerInterface $em)
@@ -207,6 +221,19 @@ class ApiController extends AbstractController
         $folderTitle = $contentObject->folderTitle;
         $folder->setTitle($folderTitle);
         $em->persist($folder);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/folder-put/{id<\d+>}", name="folder_put", methods={"PUT"})
+     */
+    public function folderPut($id, Request $request, EntityManagerInterface $em, FolderRepository $folderRepository)
+    {
+        $folder = $folderRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $folderTitle = $contentObject->folderTitle;
+        $folder->setTitle($folderTitle);
         $em->flush();
         return $this->json(null, 200, [], []);
     }

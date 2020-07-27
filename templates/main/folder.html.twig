@@ -3,7 +3,13 @@
 {% block title %}{{ folder.title }}{% endblock %}
 
 {% block body %}
-<h1 class="page--title">{{ folder.title }}</h1>
+<div class="title-form--container">
+    <form class="title-form--form" action="{{ path('folder_put', {'id': folder.id}) }}">
+        <input class="title-form--title-input" type="text" name="folderTitle" value="{{ folder.title }}" disabled>
+        <input class="title-form--title-submit hidden" type="submit" value="Modifier">
+        <i class="fas fa-edit button--edit-folder"></i>
+    </form>
+</div>
     <div class="folder-page--container">
     <div class="file--uploads">
     {% for file in folder.uploadedFiles %}

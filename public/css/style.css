@@ -55,8 +55,10 @@ i
     display: inline;
 }
 
+.button--edit-folder,
 .button--edit-task,
 .button--edit-project,
+.title-form--title-submit,
 .fa-eye
 {
     cursor: pointer;
@@ -242,4 +244,33 @@ i
 .folder--delete-form > input
 {
     display: none;
+}
+
+.title-form--container
+{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.title-form--form
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.title-form--title-input
+{
+    width: 60%;
+    text-align: center;
+    border: none;
+    text-transform: uppercase;
+    font-size: large;
+    color: black;
+}
+
+.button--edit-folder
+{
+    display: inline;
 }

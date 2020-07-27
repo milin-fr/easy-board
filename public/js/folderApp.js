@@ -6,7 +6,13 @@ var app = {
       dropzone.addEventListener("dragleave", app.dragLeave);
       dropzone.addEventListener("drop", app.dragDrop);
       document.querySelectorAll(".fa-trash-alt").forEach(function(element){
-        element.addEventListener("submit", app.deleteFolder);
+        element.addEventListener("click", app.deleteFolder);
+      });
+      document.querySelectorAll(".button--edit-folder").forEach(function(element){
+        element.addEventListener("click", app.enableForm);
+      });
+      document.querySelectorAll(".title-form--form").forEach(function(element){
+        element.addEventListener("submit", app.editFolder);
       });
     },
     dragOver: function(event) {
@@ -49,6 +55,26 @@ var app = {
       }else{
         console.log("nay");
       }
+    },
+    enableForm: function() {
+      document.querySelector(".title-form--title-input").disabled = false;
+      document.querySelector(".title-form--title-input").focus();
+      document.querySelector(".title-form--title-submit").classList.remove("hidden");
+    },
+    editFolder: function(event) {
+      event.preventDefault();
+      const url = this.action;
+      axios.post(url, {
+        "folderTitle": this.querySelector('input[name="folderTitle"]').value,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      document.querySelector(".title-form--title-input").disabled = true;
+      document.querySelector(".title-form--title-submit").classList.add("hidden");
     },
 };
 
