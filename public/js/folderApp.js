@@ -82,7 +82,7 @@ var app = {
       document.querySelector(".title-form--title-submit").classList.add("hidden");
     },
     deleteFile: function(event) {
-      if (confirm("Supprimer le le fichier?")){
+      if (confirm("Supprimer le le fichier ?")){
         const url = event.target.dataset.deleteUrl;
         axios.delete(url, {
         }).then(function (response) {
@@ -102,7 +102,13 @@ var app = {
       });
     },
     deleteAll: function() {
-
+      if (confirm("Supprimer toutes les fichiers ?")){
+        document.querySelectorAll(".file--delete").forEach(function(element){
+          axios.delete(element.dataset.deleteUrl, {
+          });
+        });
+        setTimeout(function(){ document.location.reload(true); }, 1000);
+      }
     }
 };
 
