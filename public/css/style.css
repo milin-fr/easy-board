@@ -29,7 +29,8 @@ i
 .task--list-item
 {
     box-shadow:  5px 5px 5px grey;
-    
+    padding: 0.5rem;
+    border: solid lightgray 1px;
 }
 
 .user-list
@@ -45,14 +46,14 @@ i
     border: none;
 }
 
-.input--title
+.small
 {
-    width: 12rem;
+    width: 40%;
 }
 
-.input--description
+.big
 {
-    width: 22rem;
+    width: 60%;
 }
 
 .task--list-form,
@@ -61,6 +62,7 @@ i
     display: inline;
 }
 
+.fa-plus-square,
 .button--edit-folder,
 .button--edit-task,
 .button--edit-project,
@@ -296,4 +298,9 @@ i
 #file--delete-all
 {
     margin: 2rem 0 0 2rem;
+}
+
+.checklist--container
+{
+    margin: 1rem 0;
 }

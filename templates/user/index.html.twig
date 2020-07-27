@@ -14,7 +14,7 @@
                     {% if task in user.tasks and task.taskStatus.title != "Fini" %}
                         <li class="task--list-item" draggable="false" data-task-id="{{ task.id }}" id="task-{{ task.id }}-item">
                             <form class="task--list-form" action="{{ path('task_put', {'id': task.id}) }}">
-                            <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
+                            <input type="text" class="input--title big" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                             <input type="submit" class="input--submit-task-change hidden" value="Ok">
                             </form>
                             <select class="taskStatus" data-action="{{ path('task_status_update') }}" style="background-color:{{ task.taskStatus.color }}" data-task-id="{{ task.id }}">

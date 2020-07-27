@@ -22,7 +22,7 @@
 				{% if task.taskStatus == taskStatus %}
 					<li class="task--list-item" draggable="false" data-task-id="{{ task.id }}" id="task-{{ task.id }}-item">
                     <form class="task--list-form" action="{{ path('task_put', {'id': task.id}) }}">
-                    <input type="text" class="input--title" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
+                    <input type="text" class="input--title small" name="taskTitle" data-task-id={{ task.id }} value="{{ task.title }}" readonly>
                     <input type="submit" class="input--submit-task-change hidden" value="Ok">
                     </form>
 						<select class="taskUser" name="taskUser" data-action="{{ path('task_user_put', {'id': task.id}) }}" style="background-color:{{ task.user ? task.user.color : "#ffffff" }}" value="{{ task.user != "" ? task.user.id : "" }}" data-user="{{ task.user }}">
@@ -35,8 +35,23 @@
 						</select>
 
                         <i class="fas fa-edit button--edit-task" data-task-id="{{ task.id }}"></i>
-						<i class="fas fa-trash-alt" data-delete-url="{{ path('api_task_delete', {'id': task.id}) }}"></i>
+						<i class="fas fa-trash-alt task--delete" data-delete-url="{{ path('api_task_delete', {'id': task.id}) }}"></i>
+						<i class="far fa-plus-square" data-task-id="{{ task.id }}"></i>
                         <i class="fas fa-arrows-alt"></i>
+						{% if task.checklistItems|length > 0 %}
+						<div class="checklist--container">
+							{% for checklistItem in task.checklistItems %}
+								- {{ checklistItem.title }}
+								<input class="checklist--done" type="checkbox" {{ checklistItem.done == 1 ? 'checked' : '' }} data-done-url="{{ path('api_checklist_done', {'id': checklistItem.id}) }}">
+								<i class="fas fa-trash-alt checklist--delete" data-delete-url="{{ path('api_checklist_delete', {'id': checklistItem.id}) }}"></i>
+							{% endfor %}
+						</div>
+						{% endif %}
+						<form id="checklist-form--{{ task.id }}" class="checklist--form hidden" action="{{ path('api_checklist_post', {'id': task.id}) }}">
+							<input type="text" name="checklist-title">
+							<input type="submit" value="Ok">
+							<input class="button--cancel" type="submit" value="Annuler">
+						</form>
 					</li>
 				{% endif %}
 			{% endfor %}

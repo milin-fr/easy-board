@@ -2,11 +2,13 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\ChecklistItem;
 use App\Entity\Folder;
 use App\Entity\Project;
 use App\Entity\Task;
 use App\Entity\UploadedFile;
 use App\Form\UploadedFileType;
+use App\Repository\ChecklistItemRepository;
 use App\Repository\FolderRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectStatusRepository;
@@ -147,6 +149,10 @@ class ApiController extends AbstractController
     public function taskDelete($id, EntityManagerInterface $em, TaskRepository $taskRepository)
     {
         $task = $taskRepository->find($id);
+        $checklistItems = $task->getChecklistItems();
+        foreach($checklistItems as $checklistItem){
+            $em->remove($checklistItem);
+        }
         $em->remove($task);
         $em->flush();
         return $this->json(null, 200, [], []);
@@ -246,6 +252,46 @@ class ApiController extends AbstractController
     {
         $folder = $folderRepository->find($id);
         $em->remove($folder);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/checklist-post/{id<\d+>}", name="api_checklist_post", methods={"POST"})
+     */
+    public function checklistPost($id, Request $request, EntityManagerInterface $em, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $checklistTitle = $contentObject->checklistTitle;
+        $checklistItem = new ChecklistItem();
+        $checklistItem->setTitle($checklistTitle);
+        $em->persist($checklistItem);
+        $task->addChecklistItem($checklistItem);
+        $em->flush();
+        return $this->json($task, 200, [], ['groups' => 'get:tasks']);
+    }
+
+    /**
+     * @Route("/checklist-done/{id<\d+>}", name="api_checklist_done", methods={"PUT"})
+     */
+    public function checklistDone($id, Request $request, EntityManagerInterface $em, ChecklistItemRepository $checklistItemRepository)
+    {
+        $checklistItem = $checklistItemRepository->find($id);
+        $contentObject = json_decode($request->getContent());
+        $checklistDone = $contentObject->checklistDone;
+        $checklistItem->setDone($checklistDone);
+        $em->flush();
+        return $this->json(null, 200, [], []);
+    }
+
+    /**
+     * @Route("/checklist-delete/{id<\d+>}", name="api_checklist_delete", methods={"DELETE"})
+     */
+    public function checklistDelete($id, EntityManagerInterface $em, ChecklistItemRepository $checklistItemRepository)
+    {
+        $checkList = $checklistItemRepository->find($id);
+        $em->remove($checkList);
         $em->flush();
         return $this->json(null, 200, [], []);
     }
