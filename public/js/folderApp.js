@@ -17,6 +17,8 @@ var app = {
       document.querySelectorAll(".file--delete").forEach(function(link){
         link.addEventListener("click", app.deleteFile);
       });
+      document.querySelector("#file--download-all").addEventListener("click", app.downloadAll);
+      document.querySelector("#file--delete-all").addEventListener("click", app.deleteAll);
     },
     dragOver: function(event) {
       event.preventDefault();
@@ -94,6 +96,14 @@ var app = {
         console.log("nay");
       }
     },
+    downloadAll: function() {
+      document.querySelectorAll(".file--download-link").forEach(function(element){
+        window.open(element.href, "_blank");
+      });
+    },
+    deleteAll: function() {
+
+    }
 };
 
 document.addEventListener('DOMContentLoaded', app.init);

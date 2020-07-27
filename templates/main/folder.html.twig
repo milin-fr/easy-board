@@ -14,7 +14,7 @@
     <div class="file--uploads">
     {% for file in folder.uploadedFiles %}
         <div class="file--single-line">
-            <a href="{{ path('api_file_download', {'id': file.id}) }}">{{ file.filePath }}</a>
+            <a class="file--download-link" href="{{ path('api_file_download', {'id': file.id}) }}">{{ file.filePath }}</a>
             <i class="fas fa-trash-alt file--delete" data-delete-url="{{ path('api_file_delete', {'id': file.id}) }}"></i>
         </div>
     {% else %}
@@ -26,6 +26,10 @@
     <div id="file--drop-zone" data-upload-url="{{ path('api_file_upload', {'id': folder.id}) }}">
         Déplacez le fichier ici pour le sauvegarder.
     </div>
+    </div>
+    <div class="bulk--actions">
+        <button id="file--download-all">Tout telecharger</button>
+        <button id="file--delete-all">Tout supprimer</button>
     </div>
 {% endblock %}
 {% block javascripts %}

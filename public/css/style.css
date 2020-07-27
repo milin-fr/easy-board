@@ -59,7 +59,9 @@ i
 .button--edit-task,
 .button--edit-project,
 .title-form--title-submit,
-.fa-eye
+.fa-eye,
+#file--download-all,
+#file--delete-all
 {
     cursor: pointer;
 }
@@ -273,4 +275,19 @@ i
 .button--edit-folder
 {
     display: inline;
+}
+
+.bulk--actions
+{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#file--download-all,
+#file--delete-all
+{
+    margin: 2rem 0 0 2rem;
 }
