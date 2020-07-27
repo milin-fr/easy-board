@@ -26,6 +26,12 @@ i
     border: solid white 4px;
 }
 
+.task--list-item
+{
+    box-shadow:  5px 5px 5px grey;
+    
+}
+
 .user-list
 {
     position: fixed;

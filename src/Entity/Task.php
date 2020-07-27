@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -52,6 +54,16 @@ class Task
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="tasks")
      */
     private $project;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ChecklistItem::class, mappedBy="task")
+     */
+    private $checklistItems;
+
+    public function __construct()
+    {
+        $this->checklistItems = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -147,6 +159,37 @@ class Task
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ChecklistItem[]
+     */
+    public function getChecklistItems(): Collection
+    {
+        return $this->checklistItems;
+    }
+
+    public function addChecklistItem(ChecklistItem $checklistItem): self
+    {
+        if (!$this->checklistItems->contains($checklistItem)) {
+            $this->checklistItems[] = $checklistItem;
+            $checklistItem->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChecklistItem(ChecklistItem $checklistItem): self
+    {
+        if ($this->checklistItems->contains($checklistItem)) {
+            $this->checklistItems->removeElement($checklistItem);
+            // set the owning side to null (unless already changed)
+            if ($checklistItem->getTask() === $this) {
+                $checklistItem->setTask(null);
+            }
+        }
 
         return $this;
     }
