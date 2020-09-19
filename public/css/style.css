@@ -7,6 +7,9 @@
 .fa-arrows-alt
 {
     cursor: move;
+    position: absolute;
+    top: 3px;
+    right: 0px;
 }
 
 i
@@ -24,6 +27,7 @@ i
 {
     margin: 10px;
     border: solid white 4px;
+    position: relative;
 }
 
 .task--list-item

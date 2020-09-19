@@ -1,8 +1,4 @@
 doctrine_migrations:
-    name: 'Application Migrations'
-
-    # Deprecated since v2.2, use "migrations_paths" instead (array value)
-    dir_name: '%kernel.project_dir%/src/Migrations'
-
-    # Deprecated since v2.2, use "migrations_paths" instead (array key)
-    namespace: DoctrineMigrations
+    # Namespace/path to search for migrations
+    migrations_paths:
+        'DoctrineMigrations': '%kernel.project_dir%/src/Migrations'
